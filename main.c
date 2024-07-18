@@ -65,6 +65,7 @@ static int	save_path(t_data *data, char *line, int *status)
 	int		i;
 	int		start;
 	int		n;
+	int		fd;
 	char	*dup;
 
 	i = 0;
@@ -80,11 +81,13 @@ static int	save_path(t_data *data, char *line, int *status)
 		n++;
 	}
 	dup = ft_substr(line, start, n);
-	if (open(dup, O_RDONLY) == -1) //OJO PERMISOS
+	fd = open(dup, O_RDONLY);
+	if (fd == -1) //OJO PERMISOS
 	{
 		ft_putendl_fd("Salimos porque no encontramos la ruta", 2);
 		exit (1); //ESTA SALIDA HAY QUE HACERLA BIEN
 	}
+	close(fd);
 	assign_dup(data, dup, *status);
 	*status = PARAMS;
 	return (i);
