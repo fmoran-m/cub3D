@@ -100,17 +100,17 @@ static int	change_status(t_data *data, char *line, int *status)
 	i = 0;
 	while(line[i] && !avoid_spaces(line[i]))
 		i++;
-	if (ft_strncmp(line, "NO", 2) && i == 2 && data->north == NULL)
+	if (ft_strncmp(line, "NO", 2) == 0 && i == 2 && data->north == NULL)
 		*status = NORTH;
-	else if (ft_strncmp(line, "SO", 2) && i == 2 && data->south == NULL)
+	else if (ft_strncmp(line, "SO", 2) == 0 && i == 2 && data->south == NULL)
 		*status = SOUTH;
-	else if (ft_strncmp(line, "EA", 2) && i == 2 && data->east == NULL)
+	else if (ft_strncmp(line, "EA", 2) == 0 && i == 2 && data->east == NULL)
 		*status = EAST;
-	else if (ft_strncmp(line, "WE", 2) && i == 2 && data->west == NULL)
+	else if (ft_strncmp(line, "WE", 2) == 0 && i == 2 && data->west == NULL)
 		*status = WEST;
-	else if (ft_strncmp(line, "F", 1) && i == 1 && data->f_flag == 0)
+	else if (ft_strncmp(line, "F", 1) == 0 && i == 1 && data->f_flag == 0)
 		data->f_flag = 1;
-	else if (ft_strncmp(line, "C", 1) && i == 1 && data->c_flag == 0)
+	else if (ft_strncmp(line, "C", 1) == 0 && i == 1 && data->c_flag == 0)
 		data->c_flag = 1;
 	if (*status != PARAMS)
 		return (i);
@@ -118,7 +118,7 @@ static int	change_status(t_data *data, char *line, int *status)
 		return (0);
 }
 
-static int	parse_line(t_utils *utils, char *line, int status)
+static int	parse_line(t_utils *utils, char *line, int *status)
 {
 	int	i;
 	int	r_value;
@@ -129,16 +129,16 @@ static int	parse_line(t_utils *utils, char *line, int status)
 	{
 		if (avoid_spaces(line[i]))
 			i++;
-		else if (status == PARAMS)
+		else if (*status == PARAMS)
 		{
-			r_value = change_status(utils->data, line + i, &status);
+			r_value = change_status(utils->data, line + i, status);
 			if (!r_value)
 				exit(1);
 			i += r_value;
 		}
-		else if (status >= 1 && status <= 4)
+		else if (*status >= 1 && *status <= 4)
 		{
-			r_value = save_path(utils->data, line + i, &status);
+			r_value = save_path(utils->data, line + i, status);
 			if (!r_value)
 				exit(1);
 			i += r_value;
@@ -167,7 +167,7 @@ static int	get_file_data(t_utils *utils, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		parse_line(utils, line, status);
+		parse_line(utils, line, &status);
 		free(line);
 	}
 	return (1);
