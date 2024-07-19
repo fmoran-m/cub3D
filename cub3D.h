@@ -43,4 +43,12 @@ typedef struct s_utils
 //	t_mlx		*mlx;
 }	t_utils;
 
+void	init_data(t_data *data);
+void	init_utils(t_utils *utils);
+void	free_structs(t_utils *utils);
+void	file_checker(char *argv);
+int		parse_file(t_utils *utils, char *file);
+int		save_path(t_data *data, char *line, int *status);
+int	check_params(t_data *data);
+int	avoid_spaces(char c);
 #endif

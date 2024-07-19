@@ -16,7 +16,7 @@ INCLUDES = cub3D.h
 
 #MLX = ./mlx/libmlx.a
 
-SRC = main.c
+SRC = main.c control_argc.c init.c free.c parse.c parse_utils.c save_path.c
 
 OBJS = ${SRC:.c=.o}
 
