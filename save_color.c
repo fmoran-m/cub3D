@@ -51,11 +51,11 @@ static void	load_channel(t_data *data, int color, int *status)
 	else if (*status == FLOOR_3)
 		data->floor = data->floor | color;
 	else if (*status == CEL_1)
-		data->floor = data->ceiling | (color << 16);
+		data->ceiling = data->ceiling | (color << 16);
 	else if (*status == CEL_2)
-		data->floor = data->ceiling | (color << 8);
+		data->ceiling = data->ceiling | (color << 8);
 	else if (*status == CEL_3)
-		data->floor = data->ceiling | color;
+		data->ceiling = data->ceiling | color;
 }
 
 static int	control_num(t_data *data, char *line, int *status, int i)
