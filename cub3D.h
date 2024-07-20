@@ -7,13 +7,21 @@
 
 # define EXIT_ERR 1
 
-# define PARAMS	0
-# define NORTH	1
-# define SOUTH	2	
-# define EAST	3	
-# define WEST	4	
-# define FLOOR	5
-# define CEL	6
+# define PARAMS		0
+# define NORTH		1
+# define SOUTH		2	
+# define EAST		3	
+# define WEST		4	
+# define FLOOR_1	5
+# define FLOOR_2	6
+# define FLOOR_3	7	
+# define CEL_1		8
+# define CEL_2		9
+# define CEL_3		10
+# define F_COMMA_1	11
+# define F_COMMA_2	12
+# define C_COMMA_1	13
+# define C_COMMA_2	14
 
 # include <math.h>
 # include <errno.h>
@@ -25,14 +33,14 @@
 
 typedef struct s_data
 {
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		floor;
-	int		ceiling;
-	int		c_flag;
-	int		f_flag;
+	char				*north;
+	char				*south;
+	char				*east;
+	char				*west;
+	unsigned int		floor;
+	unsigned int		ceiling;
+	int					c_flag;
+	int					f_flag;
 }	t_data;
 
 typedef struct s_utils
@@ -49,6 +57,7 @@ void	free_structs(t_utils *utils);
 void	file_checker(char *argv);
 int		parse_file(t_utils *utils, char *file);
 int		save_path(t_data *data, char *line, int *status);
-int	check_params(t_data *data);
-int	avoid_spaces(char c);
+int		check_params(t_data *data);
+int		avoid_spaces(char c);
+int		save_color(t_data *data, char *line, int *status);
 #endif

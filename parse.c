@@ -16,9 +16,9 @@ static int	change_status(t_data *data, char *line, int *status)
 	else if (ft_strncmp(line, "WE", 2) == 0 && i == 2 && data->west == NULL)
 		*status = WEST;
 	else if (ft_strncmp(line, "F", 1) == 0 && i == 1 && data->f_flag == 0)
-		data->f_flag = 1;
+		*status = FLOOR_1;
 	else if (ft_strncmp(line, "C", 1) == 0 && i == 1 && data->c_flag == 0)
-		data->c_flag = 1;
+		*status = CEL_1;
 	if (*status != PARAMS)
 		return (i);
 	else
@@ -53,15 +53,13 @@ static int	parse_line(t_utils *utils, char *line, int *status)
 				return (0);
 			i += r_value;
 		}
-		/*
-		else if (status >= 5 && status <= 6)
+		else if (*status >= 5 && *status <= 14)
 		{
-			r_value = save_color(utils->data, line + i, &status);
+			r_value = save_color(utils->data, line + i, status);
 			if (!r_value)
-				exit(1);
+				return (0);
 			i += r_value;
 		}
-		*/
 	}
 	return (1);
 }

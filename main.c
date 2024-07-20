@@ -22,6 +22,8 @@ int	main(int argc, char **argv)
 	printf("South: %s\n", data.south);
 	printf("East: %s\n", data.east);
 	printf("West: %s\n", data.west);
+	printf("Floor: %d\n", data.floor);
+	printf("Ceiling: %d\n", data.ceiling);
 	free_structs(&utils);
 	return (0);
 }
