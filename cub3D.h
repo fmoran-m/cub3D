@@ -41,6 +41,7 @@ typedef struct s_data
 	unsigned int		ceiling;
 	int					c_flag;
 	int					f_flag;
+	int					data_fill;
 }	t_data;
 
 typedef struct s_utils

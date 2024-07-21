@@ -10,6 +10,7 @@ void	init_data(t_data *data)
 	data->c_flag = 0;
 	data->floor = 0;
 	data->ceiling = 0;
+	data->data_fill = 0;
 }
 
 void	init_utils(t_utils *utils)

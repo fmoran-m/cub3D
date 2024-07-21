@@ -18,7 +18,10 @@ int	check_params(t_data *data)
 	if (data->c_flag)
 		i++;
 	if (i == 6)
+	{
+		data->data_fill = 1;
 		return (1);
+	}
 	else
 		return (0);
 }

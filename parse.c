@@ -39,26 +39,38 @@ static int	parse_line(t_utils *utils, char *line, int *status)
 	{
 		if (avoid_spaces(line[i]))
 			i++;
-		else if (*status == PARAMS)
+		else if (*status == PARAMS )
 		{
 			r_value = change_status(utils->data, line + i, status);
 			if (!r_value)
 				return (0);
 			i += r_value;
 		}
-		else if (*status >= 1 && *status <= 4)
+		else if (*status >= 1 && *status <= 4 && !check_params(utils->data))
 		{
 			r_value = save_path(utils->data, line + i, status);
 			if (!r_value)
 				return (0);
 			i += r_value;
 		}
-		else if (*status >= 5 && *status <= 14)
+		else if (*status >= 5 && *status <= 14 && !check_params(utils->data))
 		{
 			r_value = save_color(utils->data, line + i, status);
 			if (!r_value)
 				return (0);
 			i += r_value;
+		}
+	}
+	if (utils->data->data_fill == 1)
+	{
+		while (line[i])
+		{
+			if (!avoid_spaces(line[i]))
+			{
+				ft_putendl_fd("Error, incorect format",  2);
+				return(0);
+			}
+			i++;
 		}
 	}
 	return (1);

@@ -8,20 +8,26 @@ static int	ft_isnum(char c)
 		return (0);
 }
 
-static void	change_status(int *status)
+static void	change_status(int *status, t_data *data)
 {
 	if (*status == FLOOR_1)
 		*status = F_COMMA_1;
 	else if (*status == FLOOR_2)
 		*status = F_COMMA_2;
 	else if (*status == FLOOR_3)
+	{
 		*status = PARAMS;
+		data->f_flag = 1;
+	}
 	else if (*status == CEL_1)
 		*status = C_COMMA_1;
 	else if (*status == CEL_2)
 		*status = C_COMMA_2;
 	else if (*status == CEL_3)
+	{
 		*status = PARAMS;
+		data->c_flag = 1;
+	}
 }
 
 static int	control_comma(char *line, int *status, int i)
@@ -78,7 +84,7 @@ static int	control_num(t_data *data, char *line, int *status, int i)
 		return (0);
 	}
 	load_channel(data, temp_num, status);
-	change_status(status);
+	change_status(status, data);
 	return (i);
 }
 
