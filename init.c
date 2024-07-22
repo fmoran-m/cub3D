@@ -11,6 +11,7 @@ void	init_data(t_data *data)
 	data->floor = 0;
 	data->ceiling = 0;
 	data->data_fill = 0;
+	data->empty_lines = 0;
 }
 
 void	init_utils(t_utils *utils)

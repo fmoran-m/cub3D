@@ -90,6 +90,7 @@ static int	get_file_data(t_utils *utils, int fd)
 		if (!parse_line(utils, line, &status))
 			return (free(line), 0);
 		free(line);
+		utils->data->empty_lines++;
 	}
 	return (1);
 }
@@ -106,8 +107,8 @@ int	parse_file(t_utils *utils, char *file)
 	}
 	if (!get_file_data(utils, fd))
 		return (0);
-	/*if (!get_map())*/
-	/*	return (0);*/
+	if (!get_map(utils->data, fd))
+		return (0);
 	return (1);
 }
 

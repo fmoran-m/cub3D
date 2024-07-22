@@ -39,6 +39,7 @@ typedef struct s_data
 	char				*west;
 	unsigned int		floor;
 	unsigned int		ceiling;
+	size_t				empty_lines;
 	int					c_flag;
 	int					f_flag;
 	int					data_fill;
@@ -61,4 +62,5 @@ int		save_path(t_data *data, char *line, int *status);
 int		check_params(t_data *data);
 int		avoid_spaces(char c);
 int		save_color(t_data *data, char *line, int *status);
+int		get_map(t_data *data, int fd);
 #endif
