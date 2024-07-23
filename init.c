@@ -1,5 +1,10 @@
 #include "cub3D.h"
 
+void	init_map(t_map *map)
+{
+	map->map = NULL;
+}
+
 void	init_data(t_data *data)
 {
 	data->north = NULL;
@@ -12,10 +17,13 @@ void	init_data(t_data *data)
 	data->ceiling = 0;
 	data->data_fill = 0;
 	data->empty_lines = 0;
+	data->map_size = 0;
+	data->map_width = 0;
 }
 
 void	init_utils(t_utils *utils)
 {
 	init_data(utils->data);
+	init_map(utils->map);
 }
 

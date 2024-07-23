@@ -3,6 +3,7 @@
 int	main(int argc, char **argv)
 {
 	t_utils	utils;
+	t_map	map;
 	t_data data;
 
 	if (argc != 2)
@@ -12,19 +13,24 @@ int	main(int argc, char **argv)
 	}
 	file_checker(argv[1]);
 	utils.data = &data;
+	utils.map = &map;
 	init_utils(&utils);
 	if (!parse_file(&utils, argv[1]))
 	{
 		free_structs(&utils);
 		return (1);
 	}
-	printf("North: %s\n", data.north);
-	printf("South: %s\n", data.south);
-	printf("East: %s\n", data.east);
-	printf("West: %s\n", data.west);
-	printf("Floor: %d\n", data.floor);
-	printf("Ceiling: %d\n", data.ceiling);
-	printf("Empty: %ld\n", data.empty_lines);
+	if (!create_map(&utils, argv[1]))
+	{
+		free_structs(&utils);
+		return (1);
+	}
+	int i = 0;
+	while(map.map[i])
+	{
+		printf("%s\n", map.map[i]);
+		i++;
+	}
 	free_structs(&utils);
 	return (0);
 }

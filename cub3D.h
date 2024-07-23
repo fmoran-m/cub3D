@@ -31,6 +31,11 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
+typedef struct s_map
+{
+	char	**map;
+}	t_map;
+
 typedef struct s_data
 {
 	char				*north;
@@ -43,12 +48,14 @@ typedef struct s_data
 	int					c_flag;
 	int					f_flag;
 	int					data_fill;
+	int					map_size;
+	int					map_width;
 }	t_data;
 
 typedef struct s_utils
 {
 	t_data		*data;
-//	t_map		*map;
+	t_map		*map;
 //	t_player	*player;
 //	t_mlx		*mlx;
 }	t_utils;
@@ -63,4 +70,6 @@ int		check_params(t_data *data);
 int		avoid_spaces(char c);
 int		save_color(t_data *data, char *line, int *status);
 int		get_map(t_data *data, int fd);
+int		create_map(t_utils *utils, char *doc);
+void	init_map(t_map *map);
 #endif

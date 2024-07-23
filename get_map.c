@@ -35,7 +35,6 @@ static int	get_to_map(char *line, int *status, t_data *data)
 		i = 0;
 		if (!is_correct_char(line[i]))
 		{
-			printf("entra1\n");
 			ft_putendl_fd("Error, incorrect format", 2);
 			return (free(line), 0);
 		}
@@ -51,11 +50,13 @@ static int	get_to_map(char *line, int *status, t_data *data)
 	return (1);
 }
 
-static int	check_map(char *line)
+static int	check_map(char *line, int *space_flag, t_data *data)
 {
 	int	i;
+	int	char_flag;
 
 	i = 0;
+	char_flag = 0;
 	while (line[i])
 	{
 		if (!is_correct_char(line[i]))
@@ -63,8 +64,19 @@ static int	check_map(char *line)
 			ft_putendl_fd("Error, incorrect format", 2);
 			return (free(line), 0);
 		}
+		if (is_map_char(line[i]) && *space_flag == 1)
+		{
+			ft_putendl_fd("Error, incorrect format", 2);
+			return (free(line), 0);
+		}
+		if (is_map_char(line[i]))
+			char_flag = 1;
 		i++;
+		if (i > data->map_width)
+			data->map_width = i;
 	}
+	if (char_flag == 0)
+		*space_flag = 1;
 	return (1);
 }
 
@@ -73,9 +85,11 @@ int	get_map(t_data *data, int fd)
 	char	*line;
 	size_t	n;
 	int		status;
+	int		space_flag;
 
 	status = 0;
-	n = 1;
+	n = 0;
+	space_flag = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -88,12 +102,14 @@ int	get_map(t_data *data, int fd)
 		}
 		if (status == 1)
 		{
-			if (!check_map(line))
+			if (!check_map(line, &space_flag, data))
 				return (0);
-			n++;
+			if (!space_flag)
+				n++;
 		}
 		free(line);
 	}
-	return (n);
+	data->map_size = n;
+	return (1);
 }
 

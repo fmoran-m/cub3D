@@ -109,6 +109,7 @@ int	parse_file(t_utils *utils, char *file)
 		return (0);
 	if (!get_map(utils->data, fd))
 		return (0);
+	close(fd);
 	return (1);
 }
 

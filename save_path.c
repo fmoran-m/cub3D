@@ -49,4 +49,3 @@ int	save_path(t_data *data, char *line, int *status)
 	*status = PARAMS;
 	return (i);
 }
-
