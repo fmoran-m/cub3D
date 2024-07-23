@@ -13,100 +13,16 @@ static int	is_map_dir(char c)
 	return (0);
 }
 
-static int	check_last_column(t_utils *utils, int y, int x)
-{
-	if (avoid_spaces(utils->map->map[y][x - 1]))
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	if (y != 0)
-	{
-		if (avoid_spaces(utils->map->map[y - 1][x])
-			|| utils->map->map[y - 1][x - 1])
-		{
-			ft_putendl_fd("Error, incorrect format", 2);
-			return (0);
-		}
-	}
-	if (y != utils->data->map_size - 1)
-	{
-		if (avoid_spaces(utils->map->map[y + 1][x])
-			|| utils->map->map[y + 1][x - 1])
-		{
-			ft_putendl_fd("Error, incorrect format", 2);
-			return (0);
-		}
-	}
-	return (1);
-}
-
-static int	check_first_column(t_utils *utils, int y, int x)
-{
-	if (avoid_spaces(utils->map->map[y][x + 1]))
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	if (y != 0)
-	{
-		if (avoid_spaces(utils->map->map[y - 1][x])
-			|| avoid_spaces(utils->map->map[y - 1][x + 1]))
-		{
-			ft_putendl_fd("Error, incorrect format", 2);
-			return (0);
-		}
-	}
-	if (y != utils->data->map_size - 1)
-	{
-		if (avoid_spaces(utils->map->map[y + 1][x]) 
-			|| avoid_spaces(utils->map->map[y + 1][x + 1]))
-		{
-			ft_putendl_fd("Error, incorrect format", 2);
-			return (0);
-		}
-	}
-	return (1);
-}
-
-static int	check_last_row(t_utils *utils, int y, int x)
-{
-	if (avoid_spaces(utils->map->map[y - 1][x])
-		|| avoid_spaces(utils->map->map[y][x - 1])
-		|| avoid_spaces(utils->map->map[y][x + 1])
-		|| avoid_spaces(utils->map->map[y - 1][x + 1])
-		|| avoid_spaces(utils->map->map[y - 1][x - 1]))
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	return (1);
-}
-
-static int	check_first_row(t_utils *utils, int y, int x)
-{
-	if (avoid_spaces(utils->map->map[y + 1][x])
-		|| avoid_spaces(utils->map->map[y][x - 1])
-		|| avoid_spaces(utils->map->map[y][x + 1])
-		|| avoid_spaces(utils->map->map[y + 1][x + 1])
-		|| avoid_spaces(utils->map->map[y + 1][x - 1]))
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	return (1);
-}
-
 static int	check_middle_square(t_utils *utils, int y, int x)
 {
-	if (avoid_spaces(utils->map->map[y - 1][x - 1])
-		|| avoid_spaces(utils->map->map[y - 1][x])
-		|| avoid_spaces(utils->map->map[y - 1][x + 1])
-		|| avoid_spaces(utils->map->map[y][x - 1])
-		|| avoid_spaces(utils->map->map[y][x + 1])
-		|| avoid_spaces(utils->map->map[y + 1][x - 1])
-		|| avoid_spaces(utils->map->map[y + 1][x])
-		|| avoid_spaces(utils->map->map[y + 1][x + 1]))
+	if (null_avoid_spaces(utils->map->map[y - 1][x - 1])
+		|| null_avoid_spaces(utils->map->map[y - 1][x])
+		|| null_avoid_spaces(utils->map->map[y - 1][x + 1])
+		|| null_avoid_spaces(utils->map->map[y][x - 1])
+		|| null_avoid_spaces(utils->map->map[y][x + 1])
+		|| null_avoid_spaces(utils->map->map[y + 1][x - 1])
+		|| null_avoid_spaces(utils->map->map[y + 1][x])
+		|| null_avoid_spaces(utils->map->map[y + 1][x + 1]))
 	{
 		ft_putendl_fd("Error, incorrect format", 2);
 		return (0);
@@ -118,23 +34,23 @@ static int	check_space(t_utils *utils, int y, int x)
 {
 	if (x == 0)
 	{
-		if (!check_first_column(utils, y, x))
-			return (0);
+		ft_putendl_fd("Error, incorrect format", 2);
+		return (0);
 	}
 	else if (x == utils->data->map_width - 1)
 	{
-		if (!check_last_column(utils, y, x))
-			return (0);
+		ft_putendl_fd("Error, incorrect format", 2);
+		return (0);
 	}
 	else if (y == 0)
 	{
-		if (!check_first_row(utils, y, x))
-			return (0);
+		ft_putendl_fd("Error, incorrect format", 2);
+		return (0);
 	}
 	else if (y == utils->data->map_size - 1)
 	{
-		if (!check_last_row(utils, y, x))
-			return (0);
+		ft_putendl_fd("Error, incorrect format", 2);
+		return (0);
 	}
 	else
 	{
@@ -157,6 +73,7 @@ static int	validate_map(t_utils *utils)
 	zero_flag = 0;
 	while (y < utils->data->map_size)
 	{
+		x = 0;
 		while (utils->map->map[y][x])
 		{
 			if (utils->map->map[y][x] == '0' || is_map_dir(utils->map->map[y][x]))
@@ -165,11 +82,6 @@ static int	validate_map(t_utils *utils)
 				if (!check_space(utils, y, x))
 					return (0);
 			}
-			//else if (utils->map->map[y][x] == '1')
-			//{
-			//	if (!check_single_one(utils, y, x)
-			//		return (0);
-			//}
 			else if (is_map_dir(utils->map->map[y][x]))
 			{
 				if (mapchar_flag == 1)
@@ -191,14 +103,11 @@ static int	validate_map(t_utils *utils)
 	return (1);
 }
 
-static int	allocate_line(t_map *map, char *line, int i)
+static int	allocate_line(t_map *map, t_data *data, char *line, int i)
 {
-	int j;
+	int	j;
 
-	j = 0;
-	while (line[j] && line[j] != '\n')
-		j++;
-	map->map[i] = ft_calloc(j + 1, sizeof(char));
+	map->map[i] = ft_calloc(data->map_width + 1, sizeof(char));
 	if (!map->map[i])
 	{
 		ft_putendl_fd("Error, memory allocation", 2); // Liberar toda la matriz
@@ -230,7 +139,7 @@ static int	allocate_map(t_utils *utils, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		if (!allocate_line(utils->map, line, i))
+		if (!allocate_line(utils->map, utils->data, line, i))
 			return (free(line), 0);
 		free(line);
 		i++;

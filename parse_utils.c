@@ -37,3 +37,16 @@ int	avoid_spaces(char c)
 	return (0);
 }
 
+int	null_avoid_spaces(char c)
+{
+	if (c == 0)
+		return (1);
+	if (c >= 9 && c <= 13)
+		return (1);
+	if (c == 32) 
+		return (1);
+	if (c == '\n')
+		return (1);
+	return (0);
+}
+

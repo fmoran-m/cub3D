@@ -57,7 +57,7 @@ static int	check_map(char *line, int *space_flag, t_data *data)
 
 	i = 0;
 	char_flag = 0;
-	while (line[i])
+	while (line[i] && line[i] != '\n')
 	{
 		if (!is_correct_char(line[i]))
 		{

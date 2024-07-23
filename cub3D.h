@@ -72,4 +72,5 @@ int		save_color(t_data *data, char *line, int *status);
 int		get_map(t_data *data, int fd);
 int		create_map(t_utils *utils, char *doc);
 void	init_map(t_map *map);
+int		null_avoid_spaces(char c);
 #endif
