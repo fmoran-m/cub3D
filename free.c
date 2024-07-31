@@ -11,4 +11,3 @@ void	free_structs(t_utils *utils)
 	if (utils->data->west)
 		free(utils->data->west);
 }
-

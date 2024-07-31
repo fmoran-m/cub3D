@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-static int	is_map_char(char c)
+int	is_map_char(char c)
 {
 	if (c == 'N')
 		return (1);
@@ -17,18 +17,10 @@ static int	is_map_char(char c)
 	return (0);
 }
 
-static int	is_correct_char(char c)
-{
-	if (!avoid_spaces(c) && !is_map_char(c))
-		return (0);
-	else 
-		return (1);
-}
-
 static int	get_to_map(char *line, int *status, t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	while (line[i])
 	{
@@ -42,7 +34,7 @@ static int	get_to_map(char *line, int *status, t_data *data)
 		{
 			data->empty_lines--;
 			*status = 1;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -60,15 +52,9 @@ static int	check_map(char *line, int *space_flag, t_map *map)
 	while (line[i] && line[i] != '\n')
 	{
 		if (!is_correct_char(line[i]))
-		{
-			ft_putendl_fd("Error, incorrect format", 2);
-			return (free(line), 0);
-		}
+			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), free(line), 0);
 		if (is_map_char(line[i]) && *space_flag == 1)
-		{
-			ft_putendl_fd("Error, incorrect format", 2);
-			return (free(line), 0);
-		}
+			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), free(line), 0);
 		if (is_map_char(line[i]))
 			char_flag = 1;
 		i++;
@@ -80,36 +66,42 @@ static int	check_map(char *line, int *space_flag, t_map *map)
 	return (1);
 }
 
+static int	check_map_status(t_utils *utils, char *line, int *status, size_t *n)
+{
+	int	space_flag;
+
+	space_flag = 0;
+	if (*status == 0)
+	{
+		if (!get_to_map(line, status, utils->data))
+			return (0);
+	}
+	if (*status == 1)
+	{
+		if (!check_map(line, &space_flag, utils->map))
+			return (0);
+		if (!space_flag)
+			(*n)++;
+	}
+	return (1);
+}
+
 int	get_map(t_utils *utils, int fd)
 {
 	char	*line;
 	size_t	n;
 	int		status;
-	int		space_flag;
 
 	status = 0;
 	n = 0;
-	space_flag = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (status == 0)
-		{
-			if (!get_to_map(line, &status, utils->data))
-				return (0);
-		}
-		if (status == 1)
-		{
-			if (!check_map(line, &space_flag, utils->map))
-				return (0);
-			if (!space_flag)
-				n++;
-		}
+		check_map_status(utils, line, &status, &n);
 		free(line);
 	}
 	utils->map->map_size = n;
 	return (1);
 }
-

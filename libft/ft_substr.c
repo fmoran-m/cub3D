@@ -14,9 +14,9 @@
 
 static char	*pointer(char const *s, unsigned int start, size_t len)
 {
-	size_t			i;
-	size_t			k;
-	char			*new;
+	size_t	i;
+	size_t	k;
+	char	*new;
 
 	i = 0;
 	k = 0;
@@ -35,8 +35,8 @@ static char	*pointer(char const *s, unsigned int start, size_t len)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t			i;
-	char			*new;
+	size_t	i;
+	char	*new;
 
 	i = 0;
 	if (s == NULL)

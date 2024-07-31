@@ -1,98 +1,45 @@
 #include "cub3D.h"
 
-static int	is_map_dir(char c)
+static int	validate_line(t_map *map, int y, int *zero_flag, int *mapchar_flag)
 {
-	if (c == 'N')
-		return (1);
-	if (c == 'S')
-		return (1);
-	if (c == 'W')
-		return (1);
-	if (c == 'E')
-		return (1);
-	return (0);
-}
+	int	x;
 
-static int	check_middle_square(t_utils *utils, int y, int x)
-{
-	if (null_avoid_spaces(utils->map->map[y - 1][x - 1])
-		|| null_avoid_spaces(utils->map->map[y - 1][x])
-		|| null_avoid_spaces(utils->map->map[y - 1][x + 1])
-		|| null_avoid_spaces(utils->map->map[y][x - 1])
-		|| null_avoid_spaces(utils->map->map[y][x + 1])
-		|| null_avoid_spaces(utils->map->map[y + 1][x - 1])
-		|| null_avoid_spaces(utils->map->map[y + 1][x])
-		|| null_avoid_spaces(utils->map->map[y + 1][x + 1]))
+	x = 0;
+	while (map->map[y][x])
 	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
+		if (map->map[y][x] == '0' || is_map_dir(map->map[y][x]))
+		{
+			*zero_flag = 1;
+			if (!check_space(map, y, x))
+				return (0);
+		}
+		else if (is_map_dir(map->map[y][x]))
+		{
+			if (*mapchar_flag == 1)
+			{
+				ft_putendl_fd("Error, incorrect format", 2);
+				return (0);
+			}
+			*mapchar_flag = 1;
+		}
+		x++;
 	}
 	return (1);
 }
 
-static int	check_space(t_utils *utils, int y, int x)
-{
-	if (x == 0)
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	else if (x == utils->map->map_width - 1)
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	else if (y == 0)
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	else if (y == utils->map->map_size - 1)
-	{
-		ft_putendl_fd("Error, incorrect format", 2);
-		return (0);
-	}
-	else
-	{
-		if (!check_middle_square(utils, y, x))
-			return (0);
-	}
-	return (1);
-}
-
-static int	validate_map(t_utils *utils)
+static int	validate_map(t_map *map)
 {
 	int	y;
-	int	x;
 	int	mapchar_flag;
 	int	zero_flag;
 
 	y = 0;
-	x = 0;
 	mapchar_flag = 0;
 	zero_flag = 0;
-	while (y < utils->map->map_size)
+	while (y < map->map_size)
 	{
-		x = 0;
-		while (utils->map->map[y][x])
-		{
-			if (utils->map->map[y][x] == '0' || is_map_dir(utils->map->map[y][x]))
-			{
-				zero_flag = 1;
-				if (!check_space(utils, y, x))
-					return (0);
-			}
-			else if (is_map_dir(utils->map->map[y][x]))
-			{
-				if (mapchar_flag == 1)
-				{
-					ft_putendl_fd("Error, incorrect format", 2);
-					return (0);
-				}
-				mapchar_flag = 1;
-			}
-			x++;
-		}
+		if (!validate_line(map, y, &zero_flag, &mapchar_flag))
+			return (0);
 		y++;
 	}
 	if (zero_flag == 0)
@@ -138,7 +85,7 @@ static int	allocate_map(t_utils *utils, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		if (!allocate_line(utils->map, line, i))
 			return (free(line), 0);
 		free(line);
@@ -164,13 +111,13 @@ int	create_map(t_utils *utils, char *doc)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		free(line);
 		i++;
 	}
 	if (!allocate_map(utils, fd))
 		return (0);
-	if (!validate_map(utils))
+	if (!validate_map(utils->map))
 		return (0);
 	return (1);
 }

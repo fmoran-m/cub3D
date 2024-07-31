@@ -4,7 +4,7 @@ int	main(int argc, char **argv)
 {
 	t_utils	utils;
 	t_map	map;
-	t_data data;
+	t_data	data;
 
 	if (argc != 2)
 	{

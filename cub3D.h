@@ -4,6 +4,7 @@
 # define ARGC_ERR "Error: this program requires only 1 argument"
 # define EXT_ERR  "Error: Invalid file extension"
 # define FILE_NOT_FOUND "Error: File not found"
+# define INC_FORMAT "Error, incorrect format"
 
 # define EXIT_ERR 1
 
@@ -73,4 +74,10 @@ int		get_map(t_utils *utils, int fd);
 int		create_map(t_utils *utils, char *doc);
 void	init_map(t_map *map);
 int		null_avoid_spaces(char c);
+int		is_map_dir(char c);
+int		check_middle_square(t_map *map, int y, int x);
+int		check_space(t_map *map, int y, int x);
+int		ft_isnum(char c);
+int		is_correct_char(char c);
+int		is_map_char(char c);
 #endif

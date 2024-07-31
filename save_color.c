@@ -1,13 +1,5 @@
 #include "cub3D.h"
 
-static int	ft_isnum(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else 
-		return (0);
-}
-
 static void	change_status(int *status, t_data *data)
 {
 	if (*status == FLOOR_1)
@@ -70,7 +62,7 @@ static int	control_num(t_data *data, char *line, int *status, int i)
 	int	temp_num;
 
 	start = i;
-	while(line[i] && ft_isnum(line[i]))
+	while (line[i] && ft_isnum(line[i]))
 		i++;
 	if (!avoid_spaces(line[i]) && line[i] != ',')
 	{
@@ -93,10 +85,10 @@ int	save_color(t_data *data, char *line, int *status)
 	int	i;
 
 	i = 0;
-	while(line[i] && avoid_spaces(line[i]))
+	while (line[i] && avoid_spaces(line[i]))
 		i++;
 	if (!line[i])
-		return (i); 
+		return (i);
 	if (*status >= 5 && *status <= 10)
 	{
 		i = control_num(data, line, status, i);

@@ -2,7 +2,7 @@
 
 char	*free_file(char **file)
 {
-	free (*file);
+	free(*file);
 	*file = NULL;
 	return (NULL);
 }

@@ -26,4 +26,3 @@ void	init_utils(t_utils *utils)
 	init_data(utils->data);
 	init_map(utils->map);
 }
-

@@ -97,8 +97,8 @@ static void	ft_allocate_arrays(char const *s, unsigned char c, char **ptr)
 
 char	**ft_split(char const *s, char c)
 {
-	struct s_vars		a;
-	char				**ptr;
+	struct s_vars	a;
+	char			**ptr;
 
 	a.total = 0;
 	a.i = 0;

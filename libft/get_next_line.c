@@ -36,11 +36,11 @@ static char	*read_line(int fd, char *file)
 		buf[buf_read] = 0;
 		temp = ft_strjoin(file, buf);
 		if (!temp)
-			return (free (buf), free_file(&file));
-		free (file);
+			return (free(buf), free_file(&file));
+		free(file);
 		file = temp;
 	}
-	free (buf);
+	free(buf);
 	return (file);
 }
 

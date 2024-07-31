@@ -5,7 +5,7 @@ static int	change_status(t_data *data, char *line, int *status)
 	int	i;
 
 	i = 0;
-	while(line[i] && !avoid_spaces(line[i]))
+	while (line[i] && !avoid_spaces(line[i]))
 		i++;
 	if (ft_strncmp(line, "NO", 2) == 0 && i == 2 && data->north == NULL)
 		*status = NORTH;
@@ -28,37 +28,36 @@ static int	change_status(t_data *data, char *line, int *status)
 	}
 }
 
+static int	data_save_assign(t_utils *utils, char *line, int *status, int *i)
+{
+	int	j;
+
+	j = *i;
+	if (avoid_spaces(line[*i]))
+		(*i)++;
+	else if (*status == PARAMS)
+		*i += change_status(utils->data, line + *i, status);
+	else if (*status >= 1 && *status <= 4 && !check_params(utils->data))
+		*i += save_path(utils->data, line + *i, status);
+	else if (*status >= 5 && *status <= 14 && !check_params(utils->data))
+		*i += save_color(utils->data, line + *i, status);
+	if (j == *i)
+		return (0);
+	else
+		return (1);
+}
+
 static int	parse_line(t_utils *utils, char *line, int *status)
 {
 	int	i;
-	int	r_value;
 
 	i = 0;
-	r_value = 0;
 	while (line[i] && !check_params(utils->data))
 	{
-		if (avoid_spaces(line[i]))
-			i++;
-		else if (*status == PARAMS )
+		if (!data_save_assign(utils, line, status, &i))
 		{
-			r_value = change_status(utils->data, line + i, status);
-			if (!r_value)
-				return (0);
-			i += r_value;
-		}
-		else if (*status >= 1 && *status <= 4 && !check_params(utils->data))
-		{
-			r_value = save_path(utils->data, line + i, status);
-			if (!r_value)
-				return (0);
-			i += r_value;
-		}
-		else if (*status >= 5 && *status <= 14 && !check_params(utils->data))
-		{
-			r_value = save_color(utils->data, line + i, status);
-			if (!r_value)
-				return (0);
-			i += r_value;
+			ft_putendl_fd("Error, incorect format", 2);
+			return (0);
 		}
 	}
 	if (utils->data->data_fill == 1)
@@ -67,8 +66,8 @@ static int	parse_line(t_utils *utils, char *line, int *status)
 		{
 			if (!avoid_spaces(line[i]))
 			{
-				ft_putendl_fd("Error, incorect format",  2);
-				return(0);
+				ft_putendl_fd("Error, incorect format", 2);
+				return (0);
 			}
 			i++;
 		}
@@ -97,7 +96,7 @@ static int	get_file_data(t_utils *utils, int fd)
 
 int	parse_file(t_utils *utils, char *file)
 {
-	int		fd;
+	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -112,5 +111,3 @@ int	parse_file(t_utils *utils, char *file)
 	close(fd);
 	return (1);
 }
-
-

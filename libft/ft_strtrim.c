@@ -79,7 +79,7 @@ static char	*allocate(const char *s1, char *ptr, int a, int z)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		a;
-	int		z;	
+	int		z;
 	char	*ptr;
 
 	if (!s1)

@@ -34,7 +34,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	k = 0;
 	if (!s1 || !s2)
 		return (0);
-	ptr = new(s1, s2);
+	ptr = new (s1, s2);
 	if (ptr == 0)
 		return (0);
 	while (s1[i])
