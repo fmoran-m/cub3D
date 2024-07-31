@@ -37,7 +37,7 @@ static int	check_space(t_utils *utils, int y, int x)
 		ft_putendl_fd("Error, incorrect format", 2);
 		return (0);
 	}
-	else if (x == utils->data->map_width - 1)
+	else if (x == utils->map->map_width - 1)
 	{
 		ft_putendl_fd("Error, incorrect format", 2);
 		return (0);
@@ -47,7 +47,7 @@ static int	check_space(t_utils *utils, int y, int x)
 		ft_putendl_fd("Error, incorrect format", 2);
 		return (0);
 	}
-	else if (y == utils->data->map_size - 1)
+	else if (y == utils->map->map_size - 1)
 	{
 		ft_putendl_fd("Error, incorrect format", 2);
 		return (0);
@@ -71,7 +71,7 @@ static int	validate_map(t_utils *utils)
 	x = 0;
 	mapchar_flag = 0;
 	zero_flag = 0;
-	while (y < utils->data->map_size)
+	while (y < utils->map->map_size)
 	{
 		x = 0;
 		while (utils->map->map[y][x])
@@ -103,11 +103,11 @@ static int	validate_map(t_utils *utils)
 	return (1);
 }
 
-static int	allocate_line(t_map *map, t_data *data, char *line, int i)
+static int	allocate_line(t_map *map, char *line, int i)
 {
 	int	j;
 
-	map->map[i] = ft_calloc(data->map_width + 1, sizeof(char));
+	map->map[i] = ft_calloc(map->map_width + 1, sizeof(char));
 	if (!map->map[i])
 	{
 		ft_putendl_fd("Error, memory allocation", 2); // Liberar toda la matriz
@@ -128,18 +128,18 @@ static int	allocate_map(t_utils *utils, int fd)
 	int		i;
 
 	i = 0;
-	utils->map->map = ft_calloc(utils->data->map_size + 1, sizeof(char *));
+	utils->map->map = ft_calloc(utils->map->map_size + 1, sizeof(char *));
 	if (!utils->map->map)
 	{
 		ft_putendl_fd("Error, memory allocation", 2);
 		return (0);
 	}
-	while (i < utils->data->map_size)
+	while (i < utils->map->map_size)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		if (!allocate_line(utils->map, utils->data, line, i))
+		if (!allocate_line(utils->map, line, i))
 			return (free(line), 0);
 		free(line);
 		i++;

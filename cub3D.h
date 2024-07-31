@@ -34,6 +34,8 @@
 typedef struct s_map
 {
 	char	**map;
+	int		map_size;
+	int		map_width;
 }	t_map;
 
 typedef struct s_data
@@ -45,11 +47,9 @@ typedef struct s_data
 	unsigned int		floor;
 	unsigned int		ceiling;
 	size_t				empty_lines;
-	int					c_flag;
-	int					f_flag;
-	int					data_fill;
-	int					map_size;
-	int					map_width;
+	int					c_flag; //Ceiling relleno
+	int					f_flag; //Flag relleno
+	int					data_fill; //Todos los datos se han completado
 }	t_data;
 
 typedef struct s_utils
@@ -69,7 +69,7 @@ int		save_path(t_data *data, char *line, int *status);
 int		check_params(t_data *data);
 int		avoid_spaces(char c);
 int		save_color(t_data *data, char *line, int *status);
-int		get_map(t_data *data, int fd);
+int		get_map(t_utils *utils, int fd);
 int		create_map(t_utils *utils, char *doc);
 void	init_map(t_map *map);
 int		null_avoid_spaces(char c);

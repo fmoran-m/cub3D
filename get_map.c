@@ -50,7 +50,7 @@ static int	get_to_map(char *line, int *status, t_data *data)
 	return (1);
 }
 
-static int	check_map(char *line, int *space_flag, t_data *data)
+static int	check_map(char *line, int *space_flag, t_map *map)
 {
 	int	i;
 	int	char_flag;
@@ -72,15 +72,15 @@ static int	check_map(char *line, int *space_flag, t_data *data)
 		if (is_map_char(line[i]))
 			char_flag = 1;
 		i++;
-		if (i > data->map_width)
-			data->map_width = i;
+		if (i > map->map_width)
+			map->map_width = i;
 	}
 	if (char_flag == 0)
 		*space_flag = 1;
 	return (1);
 }
 
-int	get_map(t_data *data, int fd)
+int	get_map(t_utils *utils, int fd)
 {
 	char	*line;
 	size_t	n;
@@ -97,19 +97,19 @@ int	get_map(t_data *data, int fd)
 			break ;
 		if (status == 0)
 		{
-			if (!get_to_map(line, &status, data))
+			if (!get_to_map(line, &status, utils->data))
 				return (0);
 		}
 		if (status == 1)
 		{
-			if (!check_map(line, &space_flag, data))
+			if (!check_map(line, &space_flag, utils->map))
 				return (0);
 			if (!space_flag)
 				n++;
 		}
 		free(line);
 	}
-	data->map_size = n;
+	utils->map->map_size = n;
 	return (1);
 }
 
