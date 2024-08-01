@@ -5,8 +5,11 @@
 # define EXT_ERR  "Error: Invalid file extension"
 # define FILE_NOT_FOUND "Error: File not found"
 # define INC_FORMAT "Error, incorrect format"
+# define MLX_ERROR_MSG "Error: MLX not correctly initialised"
 
-# define EXIT_ERR 1
+# define EXIT_ERR	1
+# define FUNC_FAIL	0
+# define FUNC_SUCC	1
 
 # define PARAMS		0
 # define NORTH		1
@@ -26,6 +29,11 @@
 
 # define IMG_WIDTH	1920
 # define IMG_HEIGHT	1080
+
+# define TRUE 1
+# define FALSE 0
+
+# define MLX_ERROR 1
 
 # include <math.h>
 # include <errno.h>
@@ -63,23 +71,12 @@ typedef	struct s_player
 	int					pl_Y;
 }	t_player;
 
-
-typedef	struct s_mlx
-{
-	void	*win;
-	void	*mlx;
-	int32_t	width;
-	int32_t	height;
-	double	delta_time;
-}	t_mlx;
-
-
 typedef struct s_utils
 {
 	t_data		*data;
 	t_map		*map;
 //	t_player	*player;
-	t_mlx		*mlx;
+	mlx_t		*mlx;
 }	t_utils;
 
 void	init_data(t_data *data);
@@ -101,5 +98,9 @@ int		check_space(t_map *map, int y, int x);
 int		ft_isnum(char c);
 int		is_correct_char(char c);
 int		is_map_char(char c);
+
+// graphics
+int		start_window(t_utils *utils);
+int		print_error(int	type);
 
 #endif

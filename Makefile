@@ -4,14 +4,15 @@ LIBFT = ./libft/libft.a
 LIBFTDIR = ./libft
 
 LIBMLX = ./MLX42
-MLX = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+MLX_LIB = $(LIBMLX)/build/libmlx42.a
+MLX = $(MLX_LIB) -ldl -lglfw -pthread -lm
 
 CC = cc
 LM = make -C
 CFLAGS = -fsanitize=address -Wall -Wextra -Werror
 
 
-INCLUDES = cub3D.h $(LIBMLX)/include
+INCLUDES = cub3D.h MLX42/include/MLX42/MLX42.h
 
 SRC = src/main.c \
 	src/free.c \
@@ -23,21 +24,29 @@ SRC = src/main.c \
 	src/parser/save_color.c \
 	src/parser/get_map.c \
 	src/parser/create_map.c \
-	src/parser/validate_utils.c
+	src/parser/validate_utils.c \
+	src/raycasting/start_window.c \
+	src/raycasting/print_errors.c
 
 OBJS = ${SRC:.c=.o}
 
-$(NAME): libmlx $(OBJS) $(INCLUDES)
-		$(LM) $(LIBFTDIR)
-		$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+	$(CC) $(OBJS) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
 
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(MLX_LIB): 
+	cmake $(LIBMLX) -B $(LIBMLX)/build
+	$(LM) $(LIBMLX)/build -j4
+
+$(LIBFT):
+	$(LM) $(LIBFTDIR)
+
 all: $(NAME)
 
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+debug: CFLAGS += -fsanitize=address -g3
+debug: $(NAME)
 
 clean:
 		$(RM) $(OBJS)
