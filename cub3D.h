@@ -46,7 +46,7 @@ typedef struct s_data
 	char				*east;
 	char				*west;
 	unsigned int		floor;
-	unsigned int		ceiling;
+	unsigned int		ceiling; // Hasta aquí para usar en las operaciones matemáticas
 	size_t				empty_lines;
 	int					c_flag; //Ceiling relleno
 	int					f_flag; //Flag relleno
