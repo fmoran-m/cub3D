@@ -45,9 +45,6 @@ $(LIBFT):
 
 all: $(NAME)
 
-debug: CFLAGS += -fsanitize=address -g3
-debug: $(NAME)
-
 clean:
 		$(RM) $(OBJS)
 		cd $(LIBFTDIR) && make clean
