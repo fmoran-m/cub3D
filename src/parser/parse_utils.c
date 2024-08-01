@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../cub3D.h"
 
 int	ft_isnum(char c)
 {

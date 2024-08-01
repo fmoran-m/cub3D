@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../cub3D.h"
 
 int	main(int argc, char **argv)
 {
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 		free_structs(&utils);
 		return (1);
 	}
+	//start_window(&utils);
 	free_structs(&utils);
-	return (0);
+	return (EXIT_SUCCESS);
 }

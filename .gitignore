@@ -5,3 +5,4 @@ d
 *.o
 *.cub
 cub3D
+.vscode/

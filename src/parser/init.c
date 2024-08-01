@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../cub3D.h"
 
 void	init_map(t_map *map)
 {
@@ -23,6 +23,7 @@ void	init_data(t_data *data)
 
 void	init_utils(t_utils *utils)
 {
+	utils->mlx = NULL;
 	init_data(utils->data);
 	init_map(utils->map);
 }

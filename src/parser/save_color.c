@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../cub3D.h"
 
 static void	change_status(int *status, t_data *data)
 {

@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../cub3D.h"
 
 static int	validate_line(t_map *map, int y, int *zero_flag, int *mapchar_flag)
 {

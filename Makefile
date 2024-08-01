@@ -13,7 +13,18 @@ CFLAGS = -fsanitize=address -Wall -Wextra -Werror
 
 INCLUDES = cub3D.h $(LIBMLX)/include
 
-SRC = main.c control_argc.c init.c free.c parse.c parse_utils.c save_path.c save_color.c get_map.c create_map.c validate_utils.c
+SRC = src/main.c \
+	src/free.c \
+	src/parser/control_argc.c \
+	src/parser/init.c \
+	src/parser/parse.c \
+	src/parser/parse_utils.c \
+	src/parser/save_path.c \
+	src/parser/save_color.c \
+	src/parser/get_map.c \
+	src/parser/create_map.c \
+	src/parser/validate_utils.c
+
 OBJS = ${SRC:.c=.o}
 
 $(NAME): libmlx $(OBJS) $(INCLUDES)

@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../cub3D.h"
 
 static void	assign_dup(t_data *data, char *dup, int status)
 {

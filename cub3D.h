@@ -24,6 +24,9 @@
 # define C_COMMA_1	13
 # define C_COMMA_2	14
 
+# define IMG_WIDTH	1920
+# define IMG_HEIGHT	1080
+
 # include <math.h>
 # include <errno.h>
 # include <unistd.h>
@@ -31,6 +34,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/libft.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_map
 {
@@ -53,12 +57,29 @@ typedef struct s_data
 	int					data_fill; //Todos los datos se han completado
 }	t_data;
 
+typedef	struct s_player
+{
+	int					pl_X;
+	int					pl_Y;
+}	t_player;
+
+
+typedef	struct s_mlx
+{
+	void	*win;
+	void	*mlx;
+	int32_t	width;
+	int32_t	height;
+	double	delta_time;
+}	t_mlx;
+
+
 typedef struct s_utils
 {
 	t_data		*data;
 	t_map		*map;
 //	t_player	*player;
-//	t_mlx		*mlx;
+	t_mlx		*mlx;
 }	t_utils;
 
 void	init_data(t_data *data);
@@ -80,4 +101,5 @@ int		check_space(t_map *map, int y, int x);
 int		ft_isnum(char c);
 int		is_correct_char(char c);
 int		is_map_char(char c);
+
 #endif
