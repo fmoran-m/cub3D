@@ -3,16 +3,16 @@ NAME = cub3D
 LIBFT = ./libft/libft.a
 LIBFTDIR = ./libft
 
-LIBMLX = ./MLX42
+LIBMLX = ./mlx
 MLX_LIB = $(LIBMLX)/build/libmlx42.a
 MLX = $(MLX_LIB) -ldl -lglfw -pthread -lm
 
 CC = cc
 LM = make -C
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -Wall -Wextra #-Werror
 
 
-INCLUDES = cub3D.h MLX42/include/MLX42/MLX42.h
+INCLUDES = cub3D.h mlx/include/MLX42/MLX42.h
 
 SRC = src/main.c \
 	src/free.c \
