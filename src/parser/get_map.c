@@ -50,9 +50,9 @@ static int	check_map(char *line, int *space_flag, t_map *map)
 	while (line[i] && line[i] != '\n')
 	{
 		if (!is_correct_char(line[i]))
-			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), free(line), 0);
+			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
 		if (is_map_char(line[i]) && *space_flag == 1)
-			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), free(line), 0);
+			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
 		if (is_map_char(line[i]))
 			char_flag = 1;
 		i++;
@@ -98,7 +98,7 @@ int	get_map(t_utils *utils, int fd)
 		if (!line)
 			break ;
 		if (!check_map_status(utils, line, &status, &n))
-			return (0);
+			return (free(line), 0);
 		free(line);
 	}
 	utils->map->map_size = n;
