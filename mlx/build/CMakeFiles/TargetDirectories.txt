@@ -1,7 +1,0 @@
-/home/fmoran-m/cub3D/mlx/build/CMakeFiles/mlx42.dir
-/home/fmoran-m/cub3D/mlx/build/CMakeFiles/edit_cache.dir
-/home/fmoran-m/cub3D/mlx/build/CMakeFiles/rebuild_cache.dir
-/home/fmoran-m/cub3D/mlx/build/CMakeFiles/list_install_components.dir
-/home/fmoran-m/cub3D/mlx/build/CMakeFiles/install.dir
-/home/fmoran-m/cub3D/mlx/build/CMakeFiles/install/local.dir
-/home/fmoran-m/cub3D/mlx/build/CMakeFiles/install/strip.dir

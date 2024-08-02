@@ -25,6 +25,8 @@ int	main(int argc, char **argv)
 		free_structs(&utils);
 		return (1);
 	}
+	for (int i = 0; map.map[i]; i++)
+		printf("%s\n", map.map[i]);
 	//start_window(&utils);
 	free_structs(&utils);
 	return (EXIT_SUCCESS);
