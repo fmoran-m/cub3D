@@ -7,6 +7,23 @@ void	init_map(t_map *map)
 	map->map_width = 0;
 }
 
+t_player	*init_player()
+{
+	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+	{
+		print_error(MEM_ERROR);
+		return (NULL);
+	}
+	player->posX = 0;
+	player->posY = 0;
+	player->dirX = 0;
+	player->dirY = 0;
+	return (player);
+}
+
 void	init_data(t_data *data)
 {
 	data->north = NULL;
@@ -24,6 +41,12 @@ void	init_data(t_data *data)
 void	init_utils(t_utils *utils)
 {
 	utils->mlx = NULL;
+	utils->player = init_player();
 	init_data(utils->data);
 	init_map(utils->map);
+	if (!utils->player)
+	{
+		free_structs(utils);
+		exit(EXIT_FAILURE);
+	}
 }

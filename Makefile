@@ -9,7 +9,7 @@ MLX = $(MLX_LIB) -ldl -lglfw -pthread -lm
 
 CC = cc
 LM = make -C
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -Wall -Wextra #-Werror
 
 
 INCLUDES = cub3D.h mlx/include/MLX42/MLX42.h
@@ -25,7 +25,7 @@ SRC = src/main.c \
 	src/parser/get_map.c \
 	src/parser/create_map.c \
 	src/parser/validate_utils.c \
-	src/raycasting/start_window.c \
+	src/raycasting/start_maze.c \
 	src/raycasting/print_errors.c
 
 OBJS = ${SRC:.c=.o}

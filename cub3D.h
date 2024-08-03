@@ -1,11 +1,12 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define ARGC_ERR "Error: this program requires only 1 argument"
+# define ARGC_ERR "Error: This program requires only 1 argument"
 # define EXT_ERR  "Error: Invalid file extension"
 # define FILE_NOT_FOUND "Error: File not found"
-# define INC_FORMAT "Error, incorrect format"
+# define INC_FORMAT "Error: Incorrect format"
 # define MLX_ERROR_MSG "Error: MLX not correctly initialised"
+# define MEM_ERROR_MSG "Error: Memory error."
 
 # define EXIT_ERR	1
 # define FUNC_FAIL	0
@@ -34,6 +35,7 @@
 # define FALSE 0
 
 # define MLX_ERROR 1
+# define MEM_ERROR 2
 
 # include <math.h>
 # include <errno.h>
@@ -67,15 +69,18 @@ typedef struct s_data
 
 typedef	struct s_player
 {
-	int					pl_X;
-	int					pl_Y;
+	int					posX;
+	int					posY;
+	int					dirX;
+	int					dirY;
+
 }	t_player;
 
 typedef struct s_utils
 {
 	t_data		*data;
 	t_map		*map;
-//	t_player	*player;
+	t_player	*player;
 	mlx_t		*mlx;
 }	t_utils;
 
@@ -101,6 +106,7 @@ int		is_map_char(char c);
 
 // graphics
 int		start_window(t_utils *utils);
+int		start_player(t_utils *utils);
 int		print_error(int	type);
 
 #endif

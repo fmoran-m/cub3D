@@ -12,4 +12,6 @@ void	free_structs(t_utils *utils)
 		free(utils->data->west);
 	if (utils->map->map)
 		free_matrix(utils->map->map);
+	if (utils->player)
+		free(utils->player);
 }
