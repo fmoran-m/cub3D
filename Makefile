@@ -26,7 +26,8 @@ SRC = src/main.c \
 	src/parser/create_map.c \
 	src/parser/validate_utils.c \
 	src/raycasting/start_maze.c \
-	src/raycasting/print_errors.c
+	src/raycasting/print_errors.c \
+	src/raycasting/init_player.c
 
 OBJS = ${SRC:.c=.o}
 

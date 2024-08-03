@@ -5,8 +5,8 @@
 # define EXT_ERR  "Error: Invalid file extension"
 # define FILE_NOT_FOUND "Error: File not found"
 # define INC_FORMAT "Error: Incorrect format"
-# define MLX_ERROR_MSG "Error: MLX not correctly initialised"
-# define MEM_ERROR_MSG "Error: Memory error."
+# define MLX_ERROR_MSG "Error: Incorrect MLX initialisation"
+# define MEM_ERROR_MSG "Error: Incorrect memory allocation"
 
 # define EXIT_ERR	1
 # define FUNC_FAIL	0
@@ -69,11 +69,13 @@ typedef struct s_data
 
 typedef	struct s_player
 {
-	int					posX;
-	int					posY;
-	int					dirX;
-	int					dirY;
-
+	double				posX;
+	double				posY;
+	double				dirX;
+	double				dirY;
+	double				planeX;
+	double				planeY;
+	double				fov_factor;
 }	t_player;
 
 typedef struct s_utils
@@ -104,9 +106,11 @@ int		ft_isnum(char c);
 int		is_correct_char(char c);
 int		is_map_char(char c);
 
-// graphics
-int		start_window(t_utils *utils);
-int		start_player(t_utils *utils);
 int		print_error(int	type);
 
+// graphics
+int		start_window(t_utils *utils);
+
+// player_initialisation
+int		start_player(t_utils *utils);
 #endif
