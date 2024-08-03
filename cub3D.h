@@ -5,7 +5,7 @@
 # define EXT_ERR  "Error: Invalid file extension"
 # define FILE_NOT_FOUND "Error: File not found"
 # define INC_FORMAT "Error: Incorrect format"
-# define MLX_ERROR_MSG "Error: Incorrect MLX initialisation"
+# define MLX_ERROR_MSG "Error: Incorrect mlx initialisation"
 # define MEM_ERROR_MSG "Error: Incorrect memory allocation"
 
 # define EXIT_ERR	1
@@ -78,11 +78,20 @@ typedef	struct s_player
 	double				fov_factor;
 }	t_player;
 
+typedef struct s_ray
+{
+	double				cameraX;
+	double				rayDirX;
+	double				rayDirY;
+}	t_ray;
+
+
 typedef struct s_utils
 {
 	t_data		*data;
 	t_map		*map;
 	t_player	*player;
+	t_ray		*ray;
 	mlx_t		*mlx;
 }	t_utils;
 

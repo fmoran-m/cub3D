@@ -27,6 +27,22 @@ t_player	*init_player()
 	return (player);
 }
 
+t_ray	*init_ray()
+{
+	t_ray	*ray;
+
+	ray = malloc(sizeof(t_ray));
+	if (!ray)
+	{
+		print_error(MEM_ERROR);
+		return (NULL);
+	}
+	ray->cameraX = 0;
+	ray->rayDirX = 0;
+	ray->rayDirY = 0;
+	return (ray);
+}
+
 void	init_data(t_data *data)
 {
 	data->north = NULL;
@@ -45,9 +61,10 @@ void	init_utils(t_utils *utils)
 {
 	utils->mlx = NULL;
 	utils->player = init_player();
+	utils->ray = init_ray();
 	init_data(utils->data);
 	init_map(utils->map);
-	if (!utils->player)
+	if (!utils->player || !utils->ray)
 	{
 		free_structs(utils);
 		exit(EXIT_FAILURE);

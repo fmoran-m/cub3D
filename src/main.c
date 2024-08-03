@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	// for (int i = 0; map.map[i]; i++)
 	// 	printf("%s\n", map.map[i]);
 	start_player(&utils);
-	printf("Pos del jugador: %f,%f\nDireccion: %f, %f\n, Plane: %f, %f\n", utils.player->posX, utils.player->posY, utils.player->dirX, utils.player->dirY, utils.player->planeX, utils.player->planeY);
+	//printf("Pos del jugador: %f,%f\nDireccion: %f, %f\n, Plane: %f, %f\n", utils.player->posX, utils.player->posY, utils.player->dirX, utils.player->dirY, utils.player->planeX, utils.player->planeY);
 	start_window(&utils);
 	free_structs(&utils);
 	return (EXIT_SUCCESS);
