@@ -24,17 +24,15 @@ static int	get_to_map(char *line, int *status, t_data *data)
 	i = 0;
 	while (line[i])
 	{
-		i = 0;
 		if (!is_correct_char(line[i]))
 		{
 			ft_putendl_fd("Error, incorrect format", 2);
-			return (free(line), 0);
+			return (0);
 		}
 		if (is_map_char(line[i]))
 		{
-			data->empty_lines--;
 			*status = 1;
-			break ;
+			return (1);
 		}
 		i++;
 	}
@@ -52,9 +50,9 @@ static int	check_map(char *line, int *space_flag, t_map *map)
 	while (line[i] && line[i] != '\n')
 	{
 		if (!is_correct_char(line[i]))
-			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), free(line), 0);
+			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
 		if (is_map_char(line[i]) && *space_flag == 1)
-			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), free(line), 0);
+			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
 		if (is_map_char(line[i]))
 			char_flag = 1;
 		i++;
@@ -99,7 +97,8 @@ int	get_map(t_utils *utils, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		check_map_status(utils, line, &status, &n);
+		if (!check_map_status(utils, line, &status, &n))
+			return (free(line), 0);
 		free(line);
 	}
 	utils->map->map_size = n;

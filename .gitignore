@@ -3,7 +3,6 @@ b
 c
 d
 *.o
-*.cub
 cub3D
 .vscode/
 MLX42/

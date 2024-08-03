@@ -51,6 +51,7 @@ int	save_path(t_data *data, char *line, int *status)
 	fd = open(dup, O_RDONLY);
 	if (fd == -1) //OJO PERMISOS
 	{
+		free(dup);
 		ft_putendl_fd("Error: Path does not exist", STDERR_FILENO);
 		return (0);
 	}

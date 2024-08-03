@@ -55,20 +55,14 @@ static int	parse_line(t_utils *utils, char *line, int *status)
 	while (line[i] && !check_params(utils->data))
 	{
 		if (!data_save_assign(utils, line, status, &i))
-		{
-			ft_putendl_fd("Error, incorect format", 2);
 			return (0);
-		}
 	}
 	if (utils->data->data_fill == 1)
 	{
 		while (line[i])
 		{
 			if (!avoid_spaces(line[i]))
-			{
-				ft_putendl_fd("Error, incorect format", 2);
 				return (0);
-			}
 			i++;
 		}
 	}
