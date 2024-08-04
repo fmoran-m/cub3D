@@ -22,7 +22,7 @@ static void	get_collision(t_utils *utils, t_ray *ray)
 			ray->mapY += ray->stepY; // hacia qué lado se moverá el moñeco
 			ray->side = 1; // Hittea pared horizontal
 		}
-		if (utils->map->map[ray->mapX][ray->mapY] == 1)
+		if (utils->map->map[ray->mapX][ray->mapY] == '1')
 			ray->hit = HIT;
 	}
 }
@@ -85,6 +85,7 @@ void	paint_screen(t_utils *utils)
 		set_ray(utils, utils->ray, column);
 		get_collision(utils, utils->ray);
 	//	get_walls_height(utils, utils->ray);
+	//	printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
 		column++;
 	}
 }
