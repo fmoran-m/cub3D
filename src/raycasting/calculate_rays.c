@@ -1,5 +1,32 @@
 #include "../../cub3D.h"
 
+// static void	get_walls_height(t_utils *utils, t_ray *ray)
+// {
+
+// }
+
+// jump to next map square, either in x-direction, or in y-direction
+static void	get_collision(t_utils *utils, t_ray *ray)
+{
+	while (ray->hit == NO_HIT)
+	{
+		if (ray->sideDistX < ray->sideDistY)
+		{
+			ray->sideDistX += ray->deltaDistX;
+			ray->mapX += ray->stepX;
+			ray->side = 0; // Rayo encontró una pared en vertical
+		}
+		else
+		{
+			ray->sideDistY += ray->deltaDistY;
+			ray->mapY += ray->stepY; // hacia qué lado se moverá el moñeco
+			ray->side = 1; // Hittea pared horizontal
+		}
+		if (utils->map->map[ray->mapX][ray->mapY] == 1)
+			ray->hit = HIT;
+	}
+}
+
 // Depending on the ray's direction, initialize steps (stepX, stepY) to move through the grid.
 static void	step_initialisation(t_ray *ray, t_player *player)
 {
@@ -25,39 +52,39 @@ static void	step_initialisation(t_ray *ray, t_player *player)
 	}
 }
 
-static void	get_ray(t_utils *utils)
+static void	set_ray(t_utils *utils, t_ray *ray, int column)
 {
-	float	column;
-	float	w;
+	int	w;
 
-	column = 0;
-	w = (float)IMG_WIDTH; // Se tiene que hacer en todos los pixeles de la pantalla
-	while (column < w)
-	{
-		utils->ray->cameraX = 2 * column / w - 1; // Normalizar
-		utils->ray->rayDirX = utils->player->dirX + utils->player->planeX
-			* utils->ray->cameraX;
-		utils->ray->rayDirY = utils->player->dirY + utils->player->planeY
-			* utils->ray->cameraX;
-		utils->ray->mapX = (int)utils->player->posX;
-		utils->ray->mapY = (int)utils->player->posY;
-		if (utils->ray->rayDirX == 0)
-			utils->ray->deltaDistX = 1e30;
-		else
-			utils->ray->deltaDistX = fabs(1 / utils->ray->rayDirX);
-		if (utils->ray->rayDirY == 0)
-			utils->ray->rayDirY = 1e30;
-		else
-			utils->ray->deltaDistY = fabs(1 / utils->ray->rayDirY);
-		step_initialisation(utils->ray, utils->player);
-		column++;
-	}
+	w = IMG_WIDTH; // Se tiene que hacer en todos los pixeles de la pantalla
+	ray->cameraX = 2 * (float)column / (float)w - 1; // Normalizar
+	ray->rayDirX = utils->player->dirX + utils->player->planeX * ray->cameraX;
+	ray->rayDirY = utils->player->dirY + utils->player->planeY * ray->cameraX;
+	ray->mapX = (int)utils->player->posX;
+	ray->mapY = (int)utils->player->posY;
+	if (ray->rayDirX == 0)
+		ray->deltaDistX = 1e30;
+	else
+		ray->deltaDistX = fabs(1 / ray->rayDirX); // fabs sirve para tener el valor absoluto para floats
+	if (ray->rayDirY == 0)
+		ray->rayDirY = 1e30;
+	else
+		ray->deltaDistY = fabs(1 / utils->ray->rayDirY);
+	step_initialisation(ray, utils->player);
 }
 
 void	paint_screen(t_utils *utils)
 {
-	while (TRUE) // Revisar esto, no sé si hace falta aquí.
+	int	column;
+	int	screen_width;
+
+	column = 0;
+	screen_width = IMG_WIDTH;
+	while (column < screen_width)
 	{
-		get_ray(utils);
+		set_ray(utils, utils->ray, column);
+		get_collision(utils, utils->ray);
+	//	get_walls_height(utils, utils->ray);
+		column++;
 	}
 }
