@@ -40,6 +40,16 @@ t_ray	*init_ray()
 	ray->cameraX = 0;
 	ray->rayDirX = 0;
 	ray->rayDirY = 0;
+	ray->deltaDistX = 0;
+	ray->deltaDistY = 0;
+	ray->sideDistX = 0;
+	ray->sideDistY = 0;
+	ray->stepX = 0;
+	ray->stepY = 0;
+	ray->mapX = 0;
+	ray->mapY = 0;
+	ray->hit = NO_HIT;
+	ray->side = 0;
 	return (ray);
 }
 

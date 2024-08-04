@@ -34,6 +34,9 @@
 # define TRUE 1
 # define FALSE 0
 
+# define HIT 1
+# define NO_HIT 0
+
 # define MLX_ERROR 1
 # define MEM_ERROR 2
 
@@ -69,20 +72,30 @@ typedef struct s_data
 
 typedef	struct s_player
 {
-	double				posX;
-	double				posY;
-	double				dirX;
-	double				dirY;
-	double				planeX;
-	double				planeY;
-	double				fov_factor;
+	float				posX;
+	float				posY;
+	float				dirX;
+	float				dirY;
+	float				planeX;
+	float				planeY;
+	float				fov_factor;
 }	t_player;
 
 typedef struct s_ray
 {
-	double				cameraX;
-	double				rayDirX;
-	double				rayDirY;
+	float				stepX;
+	float				stepY;
+	float				sideDistX;
+	float				sideDistY;
+	float				cameraX;
+	float				rayDirX;
+	float				rayDirY;
+	float				deltaDistX;
+	float				deltaDistY;
+	int					mapX;
+	int					mapY;
+	int					hit;
+	int					side;
 }	t_ray;
 
 
@@ -119,6 +132,7 @@ int		print_error(int	type);
 
 // graphics
 int		start_window(t_utils *utils);
+void	paint_screen(t_utils *utils);
 
 // player_initialisation
 int		start_player(t_utils *utils);
