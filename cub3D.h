@@ -92,6 +92,7 @@ typedef struct s_ray
 	float				rayDirY;
 	float				deltaDistX;
 	float				deltaDistY;
+	float				perpWallDist;
 	int					mapX;
 	int					mapY;
 	int					hit;

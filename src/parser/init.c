@@ -44,6 +44,7 @@ t_ray	*init_ray()
 	ray->deltaDistY = 0;
 	ray->sideDistX = 0;
 	ray->sideDistY = 0;
+	ray->perpWallDist = 0;
 	ray->stepX = 0;
 	ray->stepY = 0;
 	ray->mapX = 0;

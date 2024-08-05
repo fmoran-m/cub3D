@@ -1,9 +1,13 @@
 #include "../../cub3D.h"
 
-// static void	get_walls_height(t_utils *utils, t_ray *ray)
-// {
-
-// }
+static void	remove_fisheye(t_ray *ray)
+{
+	if (ray->side == 0)
+		ray->perpWallDist = ray->sideDistX - ray->deltaDistX;
+	else if (ray->side == 1)
+		ray->perpWallDist = ray->sideDistY - ray->deltaDistY;
+	printf("Perpendicular distance: %f\n", ray->perpWallDist);
+}
 
 // jump to next map square, either in x-direction, or in y-direction
 static void	get_collision(t_utils *utils, t_ray *ray)
@@ -67,7 +71,7 @@ static void	set_ray(t_utils *utils, t_ray *ray, int column)
 	else
 		ray->deltaDistX = fabs(1 / ray->rayDirX); // fabs sirve para tener el valor absoluto para floats
 	if (ray->rayDirY == 0)
-		ray->rayDirY = 1e30;
+		ray->rayDirY = 1e30; // Ojo que esto puede dar error
 	else
 		ray->deltaDistY = fabs(1 / utils->ray->rayDirY);
 	step_initialisation(ray, utils->player);
@@ -84,7 +88,7 @@ void	paint_screen(t_utils *utils)
 	{
 		set_ray(utils, utils->ray, column);
 		get_collision(utils, utils->ray);
-	//	get_walls_height(utils, utils->ray);
+		remove_fisheye(utils->ray);
 	//	printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
 		column++;
 	}
