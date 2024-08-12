@@ -7,16 +7,13 @@ void	init_map(t_map *map)
 	map->map_width = 0;
 }
 
-t_ray	*init_ray()
+t_ray	*init_ray(void)
 {
 	t_ray	*ray;
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
-	{
-		print_error(MEM_ERROR);
-		return (NULL);
-	}
+		return (print_error(MEM_ERROR), NULL);
 	ray->cameraX = 0;
 	ray->rayDirX = 0;
 	ray->rayDirY = 0;
@@ -31,6 +28,9 @@ t_ray	*init_ray()
 	ray->mapY = 0;
 	ray->hit = NO_HIT;
 	ray->side = 0;
+	ray->lineHeight = 0;
+	ray->drawStart = 0;
+	ray->drawEnd = 0;
 	return (ray);
 }
 

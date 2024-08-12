@@ -7,6 +7,7 @@
 # define INC_FORMAT "Error: Incorrect format"
 # define MLX_ERROR_MSG "Error: Incorrect mlx initialisation"
 # define MEM_ERROR_MSG "Error: Incorrect memory allocation"
+# define MLX_IMG_ERROR "Error: Couldn't initialise image"
 
 # define EXIT_ERR	1
 # define FUNC_FAIL	0
@@ -39,6 +40,7 @@
 
 # define MLX_ERROR 1
 # define MEM_ERROR 2
+# define IMG_ERROR 3
 
 # include <math.h>
 # include <errno.h>
@@ -108,8 +110,10 @@ typedef struct s_ray
 	int					mapY;
 	int					hit;
 	int					side;
+	int					lineHeight;
+	int					drawStart;
+	int					drawEnd;
 }	t_ray;
-
 
 typedef struct s_utils
 {

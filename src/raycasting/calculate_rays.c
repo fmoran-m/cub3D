@@ -1,12 +1,18 @@
 #include "../../cub3D.h"
 
-static void	remove_fisheye(t_ray *ray)
+static void	remove_fisheye_get_walls(t_ray *ray)
 {
 	if (ray->side == 0)
 		ray->perpWallDist = ray->sideDistX - ray->deltaDistX;
 	else if (ray->side == 1)
 		ray->perpWallDist = ray->sideDistY - ray->deltaDistY;
-	//printf("Perpendicular distance: %f\n", ray->perpWallDist);
+	ray->lineHeight = (int)(IMG_HEIGHT / ray->perpWallDist);
+	ray->drawStart = (-ray->lineHeight / 2) + (IMG_HEIGHT / 2); // Aquí se pueden editar los tamaños de las paredes, multiplicando o dividiendo IMG_HEIGHT
+	if (ray->drawStart < 0)
+		ray->drawStart = 0;
+	ray->drawEnd = (ray->lineHeight / 2) + (IMG_HEIGHT / 2);
+	if (ray->drawEnd >= IMG_HEIGHT)
+		ray->drawEnd = IMG_HEIGHT - 1;
 }
 
 // jump to next map square, either in x-direction, or in y-direction
@@ -88,7 +94,7 @@ void	raycasting(t_utils *utils)
 	{
 		set_ray(utils, utils->ray, column);
 		get_collision(utils, utils->ray);
-		remove_fisheye(utils->ray);
+		remove_fisheye_get_walls(utils->ray);
 	//	printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
 		column++;
 	}

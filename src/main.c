@@ -1,4 +1,5 @@
 #include "../cub3D.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
@@ -28,6 +29,7 @@ int	main(int argc, char **argv)
 	// for (int i = 0; map.map[i]; i++)
 	// 	printf("%s\n", map.map[i]);
 	start_player(&utils);
+	//printf("%ld\n", sizeof(t_utils));
 	//printf("Pos del jugador: %f,%f\nDireccion: %f, %f\n, Plane: %f, %f\n", utils.player->posX, utils.player->posY, utils.player->dirX, utils.player->dirY, utils.player->planeX, utils.player->planeY);
 	start_window(&utils);
 	free_structs(&utils);
