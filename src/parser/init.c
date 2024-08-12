@@ -7,26 +7,6 @@ void	init_map(t_map *map)
 	map->map_width = 0;
 }
 
-t_player	*init_player()
-{
-	t_player	*player;
-
-	player = malloc(sizeof(t_player));
-	if (!player)
-	{
-		print_error(MEM_ERROR);
-		return (NULL);
-	}
-	player->posX = 0;
-	player->posY = 0;
-	player->dirX = 0;
-	player->dirY = 0;
-	player->planeX = 0;
-	player->planeY = 0;
-	player->fov_factor = 0.66;
-	return (player);
-}
-
 t_ray	*init_ray()
 {
 	t_ray	*ray;
@@ -68,11 +48,31 @@ void	init_data(t_data *data)
 	data->empty_lines = 0;
 }
 
+t_line	*init_line(void)
+{
+	t_line	*line;
+
+	line = malloc(sizeof(t_line));
+	if (!line)
+	{
+		print_error(MEM_ERROR);
+		return (NULL);
+	}
+	line->x = 0;
+	line->y = 0;
+	line->tex_x = 0;
+	line->tex_y = 0;
+	line->y0 = 0;
+	line->y1 = 0;
+	return (line);	
+}
+
 void	init_utils(t_utils *utils)
 {
 	utils->mlx = NULL;
 	utils->player = init_player();
 	utils->ray = init_ray();
+	utils->line = init_line();
 	init_data(utils->data);
 	init_map(utils->map);
 	if (!utils->player || !utils->ray)

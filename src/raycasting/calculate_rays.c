@@ -6,7 +6,7 @@ static void	remove_fisheye(t_ray *ray)
 		ray->perpWallDist = ray->sideDistX - ray->deltaDistX;
 	else if (ray->side == 1)
 		ray->perpWallDist = ray->sideDistY - ray->deltaDistY;
-	printf("Perpendicular distance: %f\n", ray->perpWallDist);
+	//printf("Perpendicular distance: %f\n", ray->perpWallDist);
 }
 
 // jump to next map square, either in x-direction, or in y-direction
@@ -77,7 +77,7 @@ static void	set_ray(t_utils *utils, t_ray *ray, int column)
 	step_initialisation(ray, utils->player);
 }
 
-void	paint_screen(t_utils *utils)
+void	raycasting(t_utils *utils)
 {
 	int	column;
 	int	screen_width;

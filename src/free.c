@@ -16,4 +16,6 @@ void	free_structs(t_utils *utils)
 		free(utils->player);
 	if (utils->ray)
 		free(utils->ray);
+	if (utils->line)
+		free(utils->line);
 }

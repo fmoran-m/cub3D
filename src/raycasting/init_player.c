@@ -51,3 +51,23 @@ int	start_player(t_utils *utils)
 	}
 	return (FUNC_SUCC);
 }
+
+t_player	*init_player(void)
+{
+	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+	{
+		print_error(MEM_ERROR);
+		return (NULL);
+	}
+	player->posX = 0;
+	player->posY = 0;
+	player->dirX = 0;
+	player->dirY = 0;
+	player->planeX = 0;
+	player->planeY = 0;
+	player->fov_factor = 0.66;
+	return (player);
+}

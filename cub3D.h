@@ -70,6 +70,17 @@ typedef struct s_data
 	int					data_fill; //Todos los datos se han completado
 }	t_data;
 
+typedef	struct s_line
+{
+	int					x; // x coordinate of line relative to the screen
+	int					y; // the current pixel index of the line (along y axis)
+	int					y0; // y start index of drawing texture
+	int					y1; // y end index of drawing texture
+	int					tex_x; // x coordinate of texture to draw
+	int					tex_y; // y coordinate of texture to draw
+}	t_line;
+
+
 typedef	struct s_player
 {
 	float				posX;
@@ -106,35 +117,37 @@ typedef struct s_utils
 	t_map		*map;
 	t_player	*player;
 	t_ray		*ray;
+	t_line		*line;
 	mlx_t		*mlx;
 }	t_utils;
 
-void	init_data(t_data *data);
-void	init_utils(t_utils *utils);
-void	free_structs(t_utils *utils);
-void	file_checker(char *argv);
-int		parse_file(t_utils *utils, char *file);
-int		save_path(t_data *data, char *line, int *status);
-int		check_params(t_data *data);
-int		avoid_spaces(char c);
-int		save_color(t_data *data, char *line, int *status);
-int		get_map(t_utils *utils, int fd);
-int		create_map(t_utils *utils, char *doc);
-void	init_map(t_map *map);
-int		null_avoid_spaces(char c);
-int		is_map_dir(char c);
-int		check_middle_square(t_map *map, int y, int x);
-int		check_space(t_map *map, int y, int x);
-int		ft_isnum(char c);
-int		is_correct_char(char c);
-int		is_map_char(char c);
+void		init_data(t_data *data);
+void		init_utils(t_utils *utils);
+void		free_structs(t_utils *utils);
+void		file_checker(char *argv);
+int			parse_file(t_utils *utils, char *file);
+int			save_path(t_data *data, char *line, int *status);
+int			check_params(t_data *data);
+int			avoid_spaces(char c);
+int			save_color(t_data *data, char *line, int *status);
+int			get_map(t_utils *utils, int fd);
+int			create_map(t_utils *utils, char *doc);
+void		init_map(t_map *map);
+int			null_avoid_spaces(char c);
+int			is_map_dir(char c);
+int			check_middle_square(t_map *map, int y, int x);
+int			check_space(t_map *map, int y, int x);
+int			ft_isnum(char c);
+int			is_correct_char(char c);
+int			is_map_char(char c);
 
-int		print_error(int	type);
+int			print_error(int	type);
 
 // graphics
-int		start_window(t_utils *utils);
-void	paint_screen(t_utils *utils);
+int			start_window(t_utils *utils);
+void		raycasting(t_utils *utils);
 
 // player_initialisation
-int		start_player(t_utils *utils);
+int			start_player(t_utils *utils);
+t_player	*init_player(void);
 #endif
