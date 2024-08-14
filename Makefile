@@ -9,7 +9,7 @@ MLX = $(MLX_LIB) -ldl -lglfw -pthread -lm
 
 CC = cc
 LM = make -C
-CFLAGS = -fsanitize=address -Wall -Wextra #-Werror
+CFLAGS = -fsanitize=address -Wall -Wextra -Werror
 
 
 INCLUDES = cub3D.h mlx/include/MLX42/MLX42.h
