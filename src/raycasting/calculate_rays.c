@@ -83,6 +83,34 @@ static void	set_ray(t_utils *utils, t_ray *ray, int column)
 	step_initialisation(ray, utils->player);
 }
 
+static void draw_pixel(mlx_image_t* img, uint32_t x, uint32_t y, uint32_t color) {
+    // Verifica que las coordenadas estén dentro de los límites de la imagen
+    if (x >= img->width || y >= img->height)
+        return;
+
+    // Calcula la posición del pixel en el arreglo
+    uint32_t position = y * img->width + x;
+
+    // El arreglo pixels está compuesto de uint8_t, pero los colores son uint32_t.
+    // Cada píxel ocupa 4 bytes (RGBA), por lo que multiplicamos la posición por 4.
+    uint32_t* pixel_ptr = (uint32_t*)&img->pixels[position * 4];
+
+    // Asigna el valor del color
+    *pixel_ptr = color;
+}
+
+static void	draw_wall_column(t_utils *utils, int column)
+{
+	int y = utils->ray->drawStart;
+
+	while (y <= utils->ray->drawEnd)
+	{
+		draw_pixel(utils->img, column, y, 255);
+		y++;
+	}
+	return ;
+}
+
 void	raycasting(t_utils *utils)
 {
 	int	column;
@@ -95,7 +123,10 @@ void	raycasting(t_utils *utils)
 		set_ray(utils, utils->ray, column);
 		get_collision(utils, utils->ray);
 		remove_fisheye_get_walls(utils->ray);
-	//	printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
+		draw_wall_column(utils, column);
+		printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
 		column++;
 	}
+	mlx_image_to_window(utils->mlx, utils->img, 0, 0);
+	return ;
 }

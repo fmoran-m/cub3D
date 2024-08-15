@@ -123,6 +123,7 @@ typedef struct s_utils
 	t_ray		*ray;
 	t_line		*line;
 	mlx_t		*mlx;
+	mlx_image_t	*img;
 }	t_utils;
 
 void		init_data(t_data *data);

@@ -41,8 +41,8 @@ int	start_player(t_utils *utils)
 			if (utils->map->map[x][y] == 'N' || utils->map->map[x][y] == 'E'
 				|| utils->map->map[x][y] == 'S' || utils->map->map[x][y] == 'W')
 			{
-				utils->player->posX = (float)x * 0.5;
-				utils->player->posY = (float)y * 0.5;
+				utils->player->posX = (float)x + 0.5;
+				utils->player->posY = (float)y + 0.5;
 				get_player_direction(utils->player, utils->map->map[x][y]);
 			}
 			y++;
