@@ -1,16 +1,23 @@
 #include "../../cub3D.h"
 
-static void	remove_fisheye_get_walls(t_ray *ray)
+static void	get_walls_height(t_ray *ray, t_player *player)
 {
 	if (ray->side == 0)
-		ray->perpWallDist = ray->sideDistX - ray->deltaDistX;
-	else if (ray->side == 1)
+	{
+		ray-> perpWallDist = ray->sideDistX - ray->deltaDistX;
+		ray->wallX = player->posY + ray->perpWallDist * ray->rayDirY;
+	}
+	else
+	{
 		ray->perpWallDist = ray->sideDistY - ray->deltaDistY;
-	ray->lineHeight = (int)(IMG_HEIGHT / ray->perpWallDist);
-	ray->drawStart = (-ray->lineHeight / 2) + (IMG_HEIGHT / 2); // Aquí se pueden editar los tamaños de las paredes, multiplicando o dividiendo IMG_HEIGHT
+		ray->wallX = player->posX + ray->perpWallDist * ray->rayDirX;
+	}
+	ray->wallX -= floor(ray->wallX);
+	ray->line = (int)(IMG_HEIGHT / ray->perpWallDist);
+	ray->drawStart = -ray->line / 2 + IMG_HEIGHT / 2;
 	if (ray->drawStart < 0)
 		ray->drawStart = 0;
-	ray->drawEnd = (ray->lineHeight / 2) + (IMG_HEIGHT / 2);
+	ray->drawEnd = ray->line / 2 + IMG_HEIGHT / 2;
 	if (ray->drawEnd >= IMG_HEIGHT)
 		ray->drawEnd = IMG_HEIGHT - 1;
 }
@@ -122,9 +129,9 @@ void	raycasting(t_utils *utils)
 	{
 		set_ray(utils, utils->ray, column);
 		get_collision(utils, utils->ray);
-		remove_fisheye_get_walls(utils->ray);
+		get_walls_height(utils->ray, utils->player);
 		draw_wall_column(utils, column);
-		printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
+	//	printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
 		column++;
 	}
 	mlx_image_to_window(utils->mlx, utils->img, 0, 0);

@@ -28,7 +28,7 @@ t_ray	*init_ray(void)
 	ray->mapY = 0;
 	ray->hit = NO_HIT;
 	ray->side = 0;
-	ray->lineHeight = 0;
+	ray->line = 0;
 	ray->drawStart = 0;
 	ray->drawEnd = 0;
 	return (ray);

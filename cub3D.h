@@ -110,7 +110,8 @@ typedef struct s_ray
 	int					mapY;
 	int					hit;
 	int					side;
-	int					lineHeight;
+	int					line;
+	int					wallX;
 	int					drawStart;
 	int					drawEnd;
 }	t_ray;
