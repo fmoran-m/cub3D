@@ -29,8 +29,8 @@
 # define C_COMMA_1	13
 # define C_COMMA_2	14
 
-# define IMG_WIDTH	1920
-# define IMG_HEIGHT	1080
+# define IMG_WIDTH	40
+# define IMG_HEIGHT	10
 
 # define TRUE 1
 # define FALSE 0
@@ -96,16 +96,16 @@ typedef	struct s_player
 
 typedef struct s_ray
 {
-	float				stepX;
-	float				stepY;
-	float				sideDistX;
-	float				sideDistY;
-	float				cameraX;
-	float				rayDirX;
-	float				rayDirY;
-	float				deltaDistX;
-	float				deltaDistY;
-	float				perpWallDist;
+	double				stepX;
+	double				stepY;
+	double				sideDistX;
+	double				sideDistY;
+	double				cameraX;
+	double				rayDirX;
+	double				rayDirY;
+	double				deltaDistX;
+	double				deltaDistY;
+	double				perpWallDist;
 	int					mapX;
 	int					mapY;
 	int					hit;

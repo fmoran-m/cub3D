@@ -20,28 +20,40 @@ static void	get_walls_height(t_ray *ray, t_player *player)
 	ray->drawEnd = ray->line / 2 + IMG_HEIGHT / 2;
 	if (ray->drawEnd >= IMG_HEIGHT)
 		ray->drawEnd = IMG_HEIGHT - 1;
+//	printf("line: %d\nlineStart: %d\nlineEnd: %d\nwallDist: %f\n-----\n", ray->line, ray->drawStart, ray->drawEnd, ray->perpWallDist);
 }
 
 // jump to next map square, either in x-direction, or in y-direction
 static void	get_collision(t_utils *utils, t_ray *ray)
 {
-	while (ray->hit == NO_HIT)
+	printf("Con utils: %f\nSin utils: %f\n", utils->ray->deltaDistY, ray->deltaDistY);
+	//printf("ENTRAS AQUERA??? ray = %d\nVEZ: %d\n", ray->hit, column);
+	while (utils->ray->hit == NO_HIT)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		printf("--->Con utils: %f\n--->Sin utils: %f\n", utils->ray->deltaDistY, ray->deltaDistY);
+		printf("ENTRAS AQUI SIQUIERA??? ray = %d\n", ray->hit);
+		if (utils->ray->sideDistX < utils->ray->sideDistY)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
-			ray->side = 0; // Rayo encontró una pared en vertical
+			printf("Con utils: %f\nSin utils: %f\n", utils->ray->deltaDistX, ray->deltaDistX);
+			printf("AntesdeltadistX----> %f\nAntes-sideDistX: %f\n-----\n", utils->ray->deltaDistX, utils->ray->sideDistX);
+			utils->ray->sideDistX += utils->ray->deltaDistX;
+			printf("Despues-deltadist----> %f\nsideDist: %f\n-----\n", utils->ray->deltaDistX, utils->ray->sideDistX);
+			utils->ray->mapX += utils->ray->stepX;
+			utils->ray->side = 0; // Rayo encontró una pared en vertical
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY; // hacia qué lado se moverá el moñeco
-			ray->side = 1; // Hittea pared horizontal
+			printf("ENTRAS????????\n\n\n");
+			printf("antes-deltadistY----> %f\nsideDistY: %f\n-----\n", utils->ray->deltaDistY, utils->ray->sideDistY);
+			utils->ray->sideDistY += utils->ray->deltaDistY;
+			printf("despues-deltadist----> %f\nsideDist: %f\n-----\n", utils->ray->deltaDistY, utils->ray->sideDistY);
+			utils->ray->mapY += utils->ray->stepY; // hacia qué lado se moverá el moñeco
+			utils->ray->side = 1; // Hittea pared horizontal
 		}
-		if (utils->map->map[ray->mapX][ray->mapY] == '1')
-			ray->hit = HIT;
+		if (utils->map->map[(int)utils->ray->mapX][(int)utils->ray->mapY] == '1')
+			utils->ray->hit = HIT;
 	}
+//	printf("Deltadist x = %f\nDeltadist y = %f\n Collision sidedistx = %f\nCollision sidedisty = %f\n", ray->deltaDistX, ray->deltaDistY, ray->sideDistX, ray->sideDistY);
 }
 
 // Depending on the ray's direction, initialize steps (stepX, stepY) to move through the grid.
@@ -55,7 +67,7 @@ static void	step_initialisation(t_ray *ray, t_player *player)
 	else
 	{
 		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1 - player->posX) * ray->deltaDistX;
+		ray->sideDistX = (ray->mapX + 1.0 - player->posX) * ray->deltaDistX;
 	}
 	if (ray->rayDirY < 0) // El rayo va hacia arriba
 	{
@@ -74,7 +86,7 @@ static void	set_ray(t_utils *utils, t_ray *ray, int column)
 	int	w;
 
 	w = IMG_WIDTH; // Se tiene que hacer en todos los pixeles de la pantalla
-	ray->cameraX = 2 * (float)column / (float)w - 1; // Normalizar
+	ray->cameraX = (2 * (float)column) / ((float)w - 1); // Normalizar
 	ray->rayDirX = utils->player->dirX + utils->player->planeX * ray->cameraX;
 	ray->rayDirY = utils->player->dirY + utils->player->planeY * ray->cameraX;
 	ray->mapX = (int)utils->player->posX;
@@ -88,35 +100,36 @@ static void	set_ray(t_utils *utils, t_ray *ray, int column)
 	else
 		ray->deltaDistY = fabs(1 / utils->ray->rayDirY);
 	step_initialisation(ray, utils->player);
+	printf("Dentro de la funcion, sidedistX: %f\nDentro de la funcion, sidedistY: %f\n\n", ray->sideDistX, ray->sideDistY);
 }
 
-static void draw_pixel(mlx_image_t* img, uint32_t x, uint32_t y, uint32_t color) {
-    // Verifica que las coordenadas estén dentro de los límites de la imagen
-    if (x >= img->width || y >= img->height)
-        return;
+// static void draw_pixel(mlx_image_t* img, uint32_t x, uint32_t y, uint32_t color) {
+//     // Verifica que las coordenadas estén dentro de los límites de la imagen
+//     if (x >= img->width || y >= img->height)
+//         return;
 
-    // Calcula la posición del pixel en el arreglo
-    uint32_t position = y * img->width + x;
+//     // Calcula la posición del pixel en el arreglo
+//     uint32_t position = y * img->width + x;
 
-    // El arreglo pixels está compuesto de uint8_t, pero los colores son uint32_t.
-    // Cada píxel ocupa 4 bytes (RGBA), por lo que multiplicamos la posición por 4.
-    uint32_t* pixel_ptr = (uint32_t*)&img->pixels[position * 4];
+//     // El arreglo pixels está compuesto de uint8_t, pero los colores son uint32_t.
+//     // Cada píxel ocupa 4 bytes (RGBA), por lo que multiplicamos la posición por 4.
+//     uint32_t* pixel_ptr = (uint32_t*)&img->pixels[position * 4];
 
-    // Asigna el valor del color
-    *pixel_ptr = color;
-}
+//     // Asigna el valor del color
+//     *pixel_ptr = color;
+// }
 
-static void	draw_wall_column(t_utils *utils, int column)
-{
-	int y = utils->ray->drawStart;
+// static void	draw_wall_column(t_utils *utils, int column)
+// {
+// 	int y = utils->ray->drawStart;
 
-	while (y <= utils->ray->drawEnd)
-	{
-		draw_pixel(utils->img, column, y, 255);
-		y++;
-	}
-	return ;
-}
+// 	while (y <= utils->ray->drawEnd)
+// 	{
+// 		draw_pixel(utils->img, column, y, 255);
+// 		y++;
+// 	}
+// 	return ;
+// }
 
 void	raycasting(t_utils *utils)
 {
@@ -128,12 +141,13 @@ void	raycasting(t_utils *utils)
 	while (column < screen_width)
 	{
 		set_ray(utils, utils->ray, column);
+		printf("FUERA: utils-> DeltaDist: %f\n", utils->ray->deltaDistX);
 		get_collision(utils, utils->ray);
 		get_walls_height(utils->ray, utils->player);
-		draw_wall_column(utils, column);
+	//	draw_wall_column(utils, column);
 	//	printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
 		column++;
 	}
-	mlx_image_to_window(utils->mlx, utils->img, 0, 0);
+	//mlx_image_to_window(utils->mlx, utils->img, 0, 0);
 	return ;
 }
