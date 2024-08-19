@@ -1,29 +1,30 @@
 #include "../../cub3D.h"
 
+// Ojo con esta función en caso de que la mlx esté graciosa y sea moviendose en Y vs X
 static void	get_player_direction(t_player *player, char dir)
 {
 	if (dir == 'W')
 	{
-		player->dirX = 0;
-		player->dirY = -1;
+		player->dir_x = 0;
+		player->dir_y = -1;
 	}
 	else if (dir == 'E')
 	{
-		player->dirX = 0;
-		player->dirY = 1;
+		player->dir_x = 0;
+		player->dir_y = 1;
 	}
 	else if (dir == 'N')
 	{
-		player->dirX = -1;
-		player->dirY = 0;
+		player->dir_x = -1;
+		player->dir_y = 0;
 	}
 	else if (dir == 'S')
 	{
-		player->dirX = 1;
-		player->dirY = 0;
+		player->dir_x = 1;
+		player->dir_y = 0;
 	}
-	player->planeX = player->dirY * -0.66;
-	player->planeY = player->dirX * 0.66;
+	player->plane_x = player->dir_y * -0.66;
+	player->plane_y = player->dir_x * 0.66;
 	return ;
 }
 
@@ -41,8 +42,8 @@ int	start_player(t_utils *utils)
 			if (utils->map->map[x][y] == 'N' || utils->map->map[x][y] == 'E'
 				|| utils->map->map[x][y] == 'S' || utils->map->map[x][y] == 'W')
 			{
-				utils->player->posX = (float)x * 0.5;
-				utils->player->posY = (float)y * 0.5;
+				utils->player->pos_x = (float)x + 0.5;
+				utils->player->pos_y = (float)y + 0.5;
 				get_player_direction(utils->player, utils->map->map[x][y]);
 			}
 			y++;
@@ -62,12 +63,12 @@ t_player	*init_player(void)
 		print_error(MEM_ERROR);
 		return (NULL);
 	}
-	player->posX = 0;
-	player->posY = 0;
-	player->dirX = 0;
-	player->dirY = 0;
-	player->planeX = 0;
-	player->planeY = 0;
+	player->pos_x = 0;
+	player->pos_y = 0;
+	player->dir_x = 0;
+	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = 0;
 	player->fov_factor = 0.66;
 	return (player);
 }
