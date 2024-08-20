@@ -99,8 +99,8 @@ typedef	struct s_player
 
 typedef struct s_ray
 {
-	float				step_x;
-	float				step_y;
+	int					step_x;
+	int					step_y;
 	float				side_dist_x;
 	float				side_dist_y;
 	float				normalise;

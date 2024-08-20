@@ -17,13 +17,15 @@ static void	dda_algorithm(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->side = HORIZONAL_AXIS;
 		}
-		if (map->map[ray->map_x][ray->map_y] == '1')
+		if (map->map[ray->map_y][ray->map_x] == '1')
 			ray->hit = HIT;
 	}
 }
 
 static void	steps_initialisation(t_ray *ray, t_player *player)
 {
+	ray->map_x = floor((int)player->pos_x);
+	ray->map_y = floor((int)player->pos_y);
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -60,11 +62,9 @@ static void	set_delta_dist(t_ray *ray)
 
 static void	normalise_rays(t_ray *ray, t_player *player, int x)
 {
-	ray->map_x = (int)player->pos_x;
-	ray->map_y = (int)player->pos_y;
 	ray->normalise = 2 * x / (double)IMG_WIDTH - 1;
-	ray->ray_dir_x = ray->map_x + player->plane_x * ray->normalise;
-	ray->ray_dir_y = ray->map_y + player->plane_y * ray->normalise;
+	ray->ray_dir_x = player->dir_x + player->plane_x * ray->normalise;
+	ray->ray_dir_y = player->dir_y + player->plane_y * ray->normalise;
 }
 
 static void get_line_height(t_ray *ray/* , t_player *player */)
@@ -80,7 +80,6 @@ static void get_line_height(t_ray *ray/* , t_player *player */)
 	ray->draw_end = ray->line / 2 + IMG_HEIGHT / 2;
 	if (ray->draw_end >= IMG_HEIGHT)
 		ray->draw_end = IMG_HEIGHT - 1;
-	printf("Line: %d\nDrawStart: %d\nDrawEnd: %d\n-----\n", ray->line, ray->draw_start, ray->draw_end);
 }
 
 void	raycasting(t_utils *utils)
@@ -95,7 +94,7 @@ void	raycasting(t_utils *utils)
 		steps_initialisation(utils->ray, utils->player);
 		dda_algorithm(utils->ray, utils->map);
 		get_line_height(utils->ray/* , utils->player */);
-		printf("Entro aquí %d veces\n", x);
+		printf("Line: %d\nDrawStart: %d\nDrawEnd: %d\n-----\n", x, utils->ray->draw_start, utils->ray->draw_end);
 		x++;
 	}
 }
