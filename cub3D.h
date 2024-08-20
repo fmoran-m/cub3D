@@ -127,7 +127,7 @@ typedef struct s_utils
 	t_line		*line;
 	// Mover esto a un struct graphs?
 	mlx_t		*mlx;
-	mlx_image_t	*bg;
+	mlx_image_t	*img;
 }	t_utils;
 
 void		init_data(t_data *data);

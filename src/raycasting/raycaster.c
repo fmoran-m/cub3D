@@ -82,11 +82,35 @@ static void get_line_height(t_ray *ray/* , t_player *player */)
 		ray->draw_end = IMG_HEIGHT - 1;
 }
 
+void	draw_line(t_utils *utils, int x)
+{
+	int y;
+
+	y = 0;
+	while(y < utils->ray->draw_start)
+	{
+		mlx_put_pixel(utils->img, x, y, utils->data->ceiling);
+		y++;
+	}
+	while (y <= utils->ray->draw_end)
+	{
+		mlx_put_pixel(utils->img, x, y, 0xFF0000FF);
+		y++;
+	}
+	while(y < IMG_HEIGHT)
+	{
+		mlx_put_pixel(utils->img, x, y, utils->data->floor);
+		y++;
+	}
+	return;
+}
+
 void	raycasting(t_utils *utils)
 {
 	int	x;
 
 	x = 0;
+	utils->img = mlx_new_image(utils->mlx, IMG_WIDTH, IMG_HEIGHT);
 	while (x < IMG_WIDTH)
 	{
 		normalise_rays(utils->ray, utils->player, x);
@@ -94,7 +118,8 @@ void	raycasting(t_utils *utils)
 		steps_initialisation(utils->ray, utils->player);
 		dda_algorithm(utils->ray, utils->map);
 		get_line_height(utils->ray/* , utils->player */);
-		printf("Line: %d\nDrawStart: %d\nDrawEnd: %d\n-----\n", x, utils->ray->draw_start, utils->ray->draw_end);
+		draw_line(utils, x);
+		//printf("Line: %d\nDrawStart: %d\nDrawEnd: %d\n-----\n", x, utils->ray->draw_start, utils->ray->draw_end);
 		x++;
 	}
 }

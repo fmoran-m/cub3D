@@ -22,6 +22,7 @@ void	play_game(t_utils *utils)
 	utils->mlx = mlx_init(IMG_WIDTH, IMG_HEIGHT, "Cub3D", TRUE);
 	start_maze(utils);
 	render_image(utils);
+	mlx_image_to_window(utils->mlx, utils->img, 0, 0);
 	//mlx_loop_hook(utils->mlx, render_image, utils);
 	mlx_loop(utils->mlx);
 }
