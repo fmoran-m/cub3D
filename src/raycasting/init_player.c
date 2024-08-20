@@ -23,8 +23,8 @@ static void	get_player_direction(t_player *player, char dir)
 		player->dir_x = 0;
 		player->dir_y = 1;
 	}
-	player->plane_x = player->dir_y * 0.66; // Antes esto tenia un negativo, revisar 
-	player->plane_y = player->dir_x * 0.66;
+	player->plane_x = player->dir_y * FOV; // Antes esto tenia un negativo, revisar 
+	player->plane_y = player->dir_x * FOV;
 	return ;
 }
 

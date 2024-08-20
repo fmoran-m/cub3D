@@ -45,6 +45,8 @@
 # define MEM_ERROR 2
 # define IMG_ERROR 3
 
+# define FOV 2
+
 # include <math.h>
 # include <errno.h>
 # include <unistd.h>
