@@ -1,6 +1,8 @@
 #include "../cub3D.h"
 #include <stdio.h>
 
+// Revisar el parseo del xpm porque se tiene que poner xpm42
+
 int	main(int argc, char **argv)
 {
 	t_utils	utils;

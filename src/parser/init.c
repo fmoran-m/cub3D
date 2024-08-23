@@ -48,23 +48,18 @@ void	init_data(t_data *data)
 	data->empty_lines = 0;
 }
 
-t_line	*init_line(void)
+t_line	*init_graphs(void)
 {
-	t_line	*line;
+	t_graphs	*graphs;
 
-	line = malloc(sizeof(t_line));
-	if (!line)
-	{
-		print_error(MEM_ERROR);
-		return (NULL);
-	}
-	line->x = 0;
-	line->y = 0;
-	line->tex_x = 0;
-	line->tex_y = 0;
-	line->y0 = 0;
-	line->y1 = 0;
-	return (line);	
+	graphs = malloc(sizeof(t_graphs));
+	if (!graphs)
+		return (print_error(MEM_ERROR), NULL);
+	graphs->ea_text = NULL;
+	graphs->no_text = NULL;
+	graphs->we_text = NULL;
+	graphs->so_text = NULL;
+	return (graphs);	
 }
 
 void	init_utils(t_utils *utils)

@@ -45,7 +45,7 @@
 # define MEM_ERROR 2
 # define IMG_ERROR 3
 
-# define FOV 2
+# define FOV 0.66
 
 # include <math.h>
 # include <errno.h>
@@ -120,6 +120,15 @@ typedef struct s_ray
 	int					draw_end;
 }	t_ray;
 
+typedef struct s_graphs
+{
+	xpm_t	*no_text;
+	xpm_t	*ea_text;
+	xpm_t	*so_text;
+	xpm_t	*we_text;
+}	t_graphs;
+
+
 typedef struct s_utils
 {
 	t_data		*data;
@@ -130,6 +139,7 @@ typedef struct s_utils
 	// Mover esto a un struct graphs?
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	t_graphs	*text;
 }	t_utils;
 
 void		init_data(t_data *data);

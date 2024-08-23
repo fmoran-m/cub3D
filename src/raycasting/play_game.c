@@ -1,12 +1,18 @@
 #include "../../cub3D.h"
 #include <string.h>
+
+static void	load_textures(t_graphs *text, t_data *data)
+{
+	text->no_text = mlx_load_xpm42(data->north);
+	text->ea_text = mlx_load_xpm42(data->east);
+	text->so_text = mlx_load_xpm42(data->south);
+	text->we_text = mlx_load_xpm42(data->west);
+}
+
 static void	start_maze(t_utils *utils)
 {
 	start_player(utils);
-	// utils->bg = mlx_new_image(utils->mlx, IMG_WIDTH, IMG_HEIGHT);
-		// Pintar mitad y mitad para hacer el fondo de todo
-	//mlx_put_pixel(utils->bg, utils->bg->height);
-	// mlx_image_to_window(utils->mlx, utils->bg, 0, 0);
+	load_textures(utils->text, utils->data);
 }
 
 static void	render_image(void	*param)
