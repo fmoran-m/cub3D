@@ -14,23 +14,23 @@ t_ray	*init_ray(void)
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (print_error(MEM_ERROR), NULL);
-	ray->cameraX = 0;
-	ray->rayDirX = 0;
-	ray->rayDirY = 0;
-	ray->deltaDistX = 0;
-	ray->deltaDistY = 0;
-	ray->sideDistX = 0;
-	ray->sideDistY = 0;
-	ray->perpWallDist = 0;
-	ray->stepX = 0;
-	ray->stepY = 0;
-	ray->mapX = 0;
-	ray->mapY = 0;
+	ray->normalise = 0;
+	ray->ray_dir_x = 0;
+	ray->ray_dir_y = 0;
+	ray->delta_dist_x = 0;
+	ray->delta_dist_y = 0;
+	ray->side_dist_x = 0;
+	ray->side_dist_y = 0;
+	ray->wall_dist = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
 	ray->hit = NO_HIT;
 	ray->side = 0;
 	ray->line = 0;
-	ray->drawStart = 0;
-	ray->drawEnd = 0;
+	ray->draw_start = 0;
+	ray->draw_end = 0;
 	return (ray);
 }
 

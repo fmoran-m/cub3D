@@ -35,12 +35,17 @@
 # define TRUE 1
 # define FALSE 0
 
+# define VERTICAL_AXIS 0
+# define HORIZONAL_AXIS 1
+
 # define HIT 1
 # define NO_HIT 0
 
 # define MLX_ERROR 1
 # define MEM_ERROR 2
 # define IMG_ERROR 3
+
+# define FOV 2
 
 # include <math.h>
 # include <errno.h>
@@ -85,35 +90,34 @@ typedef	struct s_line
 
 typedef	struct s_player
 {
-	float				posX;
-	float				posY;
-	float				dirX;
-	float				dirY;
-	float				planeX;
-	float				planeY;
+	float				pos_x;
+	float				pos_y;
+	float				dir_x;
+	float				dir_y;
+	float				plane_x;
+	float				plane_y;
 	float				fov_factor;
 }	t_player;
 
 typedef struct s_ray
 {
-	double				stepX;
-	double				stepY;
-	double				sideDistX;
-	double				sideDistY;
-	double				cameraX;
-	double				rayDirX;
-	double				rayDirY;
-	double				deltaDistX;
-	double				deltaDistY;
-	double				perpWallDist;
-	int					mapX;
-	int					mapY;
+	int					step_x;
+	int					step_y;
+	float				side_dist_x;
+	float				side_dist_y;
+	float				normalise;
+	float				ray_dir_x;
+	float				ray_dir_y;
+	float				delta_dist_x;
+	float				delta_dist_y;
+	float				wall_dist;
+	int					map_x;
+	int					map_y;
 	int					hit;
 	int					side;
 	int					line;
-	int					wallX;
-	int					drawStart;
-	int					drawEnd;
+	int					draw_start;
+	int					draw_end;
 }	t_ray;
 
 typedef struct s_utils
@@ -123,6 +127,7 @@ typedef struct s_utils
 	t_player	*player;
 	t_ray		*ray;
 	t_line		*line;
+	// Mover esto a un struct graphs?
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 }	t_utils;
@@ -152,6 +157,7 @@ int			print_error(int	type);
 // graphics
 int			start_window(t_utils *utils);
 void		raycasting(t_utils *utils);
+void		play_game(t_utils *utils);
 
 // player_initialisation
 int			start_player(t_utils *utils);
