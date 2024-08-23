@@ -31,6 +31,7 @@ t_ray	*init_ray(void)
 	ray->line = 0;
 	ray->draw_start = 0;
 	ray->draw_end = 0;
+	ray->wall_x = 0;
 	return (ray);
 }
 
@@ -48,7 +49,7 @@ void	init_data(t_data *data)
 	data->empty_lines = 0;
 }
 
-t_line	*init_graphs(void)
+t_graphs	*init_graphs(void)
 {
 	t_graphs	*graphs;
 
@@ -59,6 +60,10 @@ t_line	*init_graphs(void)
 	graphs->no_text = NULL;
 	graphs->we_text = NULL;
 	graphs->so_text = NULL;
+	graphs->text_start = 0;
+	graphs->text_x = 0;
+	graphs->text_y = 0;
+	graphs->step = 0;
 	return (graphs);	
 }
 
@@ -67,7 +72,7 @@ void	init_utils(t_utils *utils)
 	utils->mlx = NULL;
 	utils->player = init_player();
 	utils->ray = init_ray();
-	utils->line = init_line();
+	utils->text = init_graphs();
 	init_data(utils->data);
 	init_map(utils->map);
 	if (!utils->player || !utils->ray)

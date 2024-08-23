@@ -29,8 +29,8 @@
 # define C_COMMA_1	13
 # define C_COMMA_2	14
 
-# define IMG_WIDTH	40
-# define IMG_HEIGHT	10
+# define IMG_WIDTH	1920
+# define IMG_HEIGHT	1080
 
 # define TRUE 1
 # define FALSE 0
@@ -90,27 +90,28 @@ typedef	struct s_line
 
 typedef	struct s_player
 {
-	float				pos_x;
-	float				pos_y;
-	float				dir_x;
-	float				dir_y;
-	float				plane_x;
-	float				plane_y;
-	float				fov_factor;
+	double				pos_x;
+	double				pos_y;
+	double				dir_x;
+	double				dir_y;
+	double				plane_x;
+	double				plane_y;
+	double				fov_factor;
 }	t_player;
 
 typedef struct s_ray
 {
 	int					step_x;
 	int					step_y;
-	float				side_dist_x;
-	float				side_dist_y;
-	float				normalise;
-	float				ray_dir_x;
-	float				ray_dir_y;
-	float				delta_dist_x;
-	float				delta_dist_y;
-	float				wall_dist;
+	double				side_dist_x;
+	double				side_dist_y;
+	double				normalise;
+	double				ray_dir_x;
+	double				ray_dir_y;
+	double				delta_dist_x;
+	double				delta_dist_y;
+	double				wall_dist;
+	double				wall_x;
 	int					map_x;
 	int					map_y;
 	int					hit;
@@ -126,6 +127,10 @@ typedef struct s_graphs
 	xpm_t	*ea_text;
 	xpm_t	*so_text;
 	xpm_t	*we_text;
+	double	text_start;
+	double	text_x;
+	double	text_y;
+	double	step;
 }	t_graphs;
 
 
