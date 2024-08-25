@@ -2,14 +2,14 @@
 
 static void	free_textures(t_graphs *text)
  {
-	if (text->ea_text != NULL)
-		mlx_delete_xpm42(text->ea_text);
-	if (text->no_text != NULL)
-		mlx_delete_xpm42(text->no_text);
-	if (text->so_text != NULL)
-		mlx_delete_xpm42(text->so_text);
-	if (text->we_text != NULL)
-		mlx_delete_xpm42(text->we_text);
+	if (text->text[0].text != NULL)
+		mlx_delete_xpm42(text->text[0].text);
+	if (text->text[1].text  != NULL)
+		mlx_delete_xpm42(text->text[1].text);
+	if (text->text[2].text  != NULL)
+		mlx_delete_xpm42(text->text[2].text);
+	if (text->text[3].text  != NULL)
+		mlx_delete_xpm42(text->text[3].text);
  }
 
 void	free_structs(t_utils *utils)
