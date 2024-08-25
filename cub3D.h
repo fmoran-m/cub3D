@@ -121,12 +121,16 @@ typedef struct s_ray
 	int					draw_end;
 }	t_ray;
 
+typedef struct s_img
+{
+	xpm_t		*text;
+	mlx_image_t	*display;
+	char		*addr;
+}	t_img;
+
 typedef struct s_graphs
 {
-	xpm_t	*no_text;
-	xpm_t	*ea_text;
-	xpm_t	*so_text;
-	xpm_t	*we_text;
+	t_img	text[4];
 	double	text_start;
 	double	text_x;
 	double	text_y;

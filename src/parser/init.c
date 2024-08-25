@@ -56,10 +56,10 @@ t_graphs	*init_graphs(void)
 	graphs = malloc(sizeof(t_graphs));
 	if (!graphs)
 		return (print_error(MEM_ERROR), NULL);
-	graphs->ea_text = NULL;
-	graphs->no_text = NULL;
-	graphs->we_text = NULL;
-	graphs->so_text = NULL;
+	graphs->text[0].text = NULL;
+	graphs->text[1].text = NULL;
+	graphs->text[2].text = NULL;
+	graphs->text[3].text = NULL;
 	graphs->text_start = 0;
 	graphs->text_x = 0;
 	graphs->text_y = 0;
