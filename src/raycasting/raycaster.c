@@ -81,7 +81,6 @@ static void get_line_height(t_ray *ray, t_player *player)
 		ray->wall_dist = ray->side_dist_y - ray->delta_dist_y;
 		ray->wall_x = player->pos_x + ray->wall_dist * ray->ray_dir_x;
 	}
-	ray->wall_x -= floor(ray->wall_x);
 	ray->line = (int)(IMG_HEIGHT / ray->wall_dist);
 	ray->draw_start = -ray->line / 2 + IMG_HEIGHT / 2;
 	if (ray->draw_start < 0)
@@ -91,65 +90,108 @@ static void get_line_height(t_ray *ray, t_player *player)
 		ray->draw_end = IMG_HEIGHT - 1;
 }
 
-void	get_texture(t_ray *ray, t_utils *utils, t_graphs *text)
+static double get_ray_impact(t_ray *ray, t_player *player)
 {
-    //   Código original de la guía, para que lo revises porsi. Unifiqué la condición en un or porque en los dos casos hace lo mismo.
-	//		Finally, texX is the x-coordinate of the texture, and this is calculated out of wallX. <- Sirve para esto
-    //   int texX = int(wallX * double(texWidth));
-    //   if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
-    //   if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
-	text->text_x = (int)(ray->wall_x) * (double)text->text[0].display->width;
-	if ((ray->side == 0 && utils->player->dir_x > 0)
-		|| (ray->side == 1 && utils->player->dir_y < 0))
-		text->text_x = text->text[0].display->width - text->text_x - 1;
-	text->step = 1.0 * text->text[0].display->height / ray->line;
-	text->text_start = (ray->draw_start - IMG_HEIGHT / 2
-			+ ray->line / 2) * text->step;
+	double square_impact;
+
+	if (ray->side == VERTICAL_AXIS)
+		square_impact = (player->pos_y + ray->wall_dist) * ray->ray_dir_y;
+	else
+		square_impact = (player->pos_x + ray->wall_dist) * ray->ray_dir_x;
+	return (square_impact);
 }
 
-// Parámetros: la imagen que queremos usar, el punto de x en el que estamos, el punto de y en el que estamos.
-// La x hay que calcularla, de ahí el chorizo en la llamada a la función
-static uint32_t	get_color(mlx_image_t *img, int x, int y)
+static int	get_text_x(t_ray *ray, t_img text, double square_impact)
 {
+	int text_x;
 
+	text_x = (int)(square_impact * text.display->width);
+	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x > 0) 
+		text_x = text.display->width - text_x - 1;
+	if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0) 
+		text_x = text.display->width - text_x - 1;
+	return text_x;
 }
+
+static double get_step(t_ray *ray, t_img text)
+{
+	double	step;
+	int		line_height;	
+
+	line_height = ray->draw_end - ray->draw_start;
+	step = (float)text.display->height / (float)line_height;
+	return (step);
+}
+
+double	get_text_pos(t_ray *ray, double step)
+{
+	double text_pos;
+	int		line_height;	
+
+	line_height = ray->draw_end - ray->draw_start;
+	text_pos = (ray->draw_start - IMG_HEIGHT / 2 + line_height / 2) * step;
+	return (text_pos);
+}
+
+int	get_text_color(int text_x, int text_y, t_img texture)
+{
+	uint32_t color;
+	uint32_t i;
+
+	color = 0;
+	i = (texture.display->width * text_y + text_x) * 4;
+	color |= texture.display->pixels[i] << 24;
+	color |= texture.display->pixels[i + 1] << 16;
+	color |= texture.display->pixels[i + 2] << 8; 
+	color |= texture.display->pixels[i + 3];
+	return color;
+}
+
+static void	draw_wall(t_utils *utils, int y, int x)
+{
+	double		square_impact;
+	int			text_x;
+	int			text_y;
+	uint32_t	color;
+	double		text_pos;
+	double		step;
+
+	square_impact = get_ray_impact(utils->ray, utils->player);
+	square_impact -= floor(square_impact);
+	text_x = get_text_x(utils->ray, utils->text->text[2], square_impact);
+	step = get_step(utils->ray, utils->text->text[2]);
+	text_pos = get_text_pos(utils->ray, step);
+	while(y < utils->ray->draw_end)
+	{
+		text_y = (int)text_pos & (utils->text->text[2].display->height - 1);
+		text_pos += step;
+		color = get_text_color(text_x, text_y, utils->text->text[2]);
+		mlx_put_pixel(utils->img, x, y, color);
+		y++;
+	}
+	return;
+}
+
 void	draw_line(t_utils *utils, int x)
 {
 	int 		y;
-	uint32_t	color;
 
-	y = 0;
-	get_texture(utils->ray, utils, utils->text);
+    y = utils->ray->draw_start;
+	/*
 	while(y < utils->ray->draw_start)
 	{
 		mlx_put_pixel(utils->img, x, y, utils->data->ceiling);
 		y++;
 	}
-	// Aquí hay que ver qué textura poner dependiendo de a qué pared mire el moñeco, de momento he cogido una de prueba
-	while(y <= utils->ray->draw_end)
-	{
-		//Código original:
-		//         // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-        // int texY = (int)texPos & (texHeight - 1);
-        // texPos += step;
-		utils->text->text_y = (int)utils->text->text_start;
-		utils->text->text_start += utils->text->step;
-		// color = get_color(utils->text->text[0].display, 
-		// 	utils->text->text[0].display->width - utils->text->text_x - 1, utils->text->text_y);
-		mlx_put_pixel(utils->img, x, y, 255);
-		y++;
-	}
-	
-	// while (y <= utils->ray->draw_end)
-	// {
-	// 	mlx_put_pixel(utils->img, x, y, 0xFF0000FF);
-	// 	y++;
-	// }
+	*/
+    draw_wall(utils, y, x);
+	/*
 	while(y < IMG_HEIGHT)
 	{
 		mlx_put_pixel(utils->img, x, y, utils->data->floor);
 		y++;
 	}
+	*/
 	return;
 }
 
