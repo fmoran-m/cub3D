@@ -20,7 +20,7 @@ static int	load_textures(t_graphs *text, t_data *data, t_utils *utils)
 	text->text[0].display = mlx_texture_to_image(utils->mlx, &text->text[0].text->texture);
 	text->text[1].display = mlx_texture_to_image(utils->mlx, &text->text[1].text->texture);
 	text->text[2].display = mlx_texture_to_image(utils->mlx, &text->text[2].text->texture);
-	text->text[3].display = mlx_texture_to_image(utils->mlx, &text->text[0].text->texture);
+	text->text[3].display = mlx_texture_to_image(utils->mlx, &text->text[3].text->texture);
 	i = -1;
 		while (++i < 4)
 	{

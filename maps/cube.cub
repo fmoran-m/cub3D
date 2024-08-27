@@ -1,0 +1,19 @@
+F 139,99,58
+C 171,154,137
+
+NO ./textures/doom/Doom1.xpm42
+EA ./textures/doom/Doom2.xpm42
+WE ./textures/doom/Doom3.xpm42
+SO ./textures/doom/Doom4.xpm42
+
+11111
+10001
+10001
+10S01
+10001
+10001
+10001
+10001
+10001
+10001
+11111

@@ -43,8 +43,8 @@ void	init_data(t_data *data)
 	data->west = NULL;
 	data->f_flag = 0;
 	data->c_flag = 0;
-	data->floor = 0;
-	data->ceiling = 0;
+	data->floor = 1;
+	data->ceiling = 1;
 	data->data_fill = 0;
 	data->empty_lines = 0;
 }

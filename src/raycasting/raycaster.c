@@ -147,27 +147,40 @@ int	get_text_color(int text_x, int text_y, t_img texture)
 	return color;
 }
 
-static void	draw_wall(t_utils *utils, int y, int x)
+static t_img    select_texture(t_ray *ray, t_img *text)
+{
+    if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y <= 0)
+        return (text[0]);
+    if (ray->side == VERTICAL_AXIS && ray->ray_dir_x >= 0)
+        return (text[1]);
+    if (ray->side == VERTICAL_AXIS && ray->ray_dir_x < 0)
+        return (text[2]);
+    return(text[3]);
+}
+
+static void	draw_wall(t_utils *utils, int *y, int x)
 {
 	double		square_impact;
 	int			text_x;
 	int			text_y;
 	uint32_t	color;
+    t_img       texture;
 	double		text_pos;
 	double		step;
 
 	square_impact = get_ray_impact(utils->ray, utils->player);
 	square_impact -= floor(square_impact);
-	text_x = get_text_x(utils->ray, utils->text->text[2], square_impact);
-	step = get_step(utils->ray, utils->text->text[2]);
+    texture = select_texture(utils->ray, utils->text->text);
+	text_x = get_text_x(utils->ray, texture, square_impact);
+	step = get_step(utils->ray, texture);
 	text_pos = get_text_pos(utils->ray, step);
-	while(y < utils->ray->draw_end)
+	while(*y < utils->ray->draw_end)
 	{
-		text_y = (int)text_pos & (utils->text->text[2].display->height - 1);
+		text_y = (int)text_pos & (texture.display->height - 1);
 		text_pos += step;
-		color = get_text_color(text_x, text_y, utils->text->text[2]);
-		mlx_put_pixel(utils->img, x, y, color);
-		y++;
+		color = get_text_color(text_x, text_y, texture);
+		mlx_put_pixel(utils->img, x, *y, color);
+        *y = *y + 1;
 	}
 	return;
 }
@@ -177,21 +190,17 @@ void	draw_line(t_utils *utils, int x)
 	int 		y;
 
     y = utils->ray->draw_start;
-	/*
 	while(y < utils->ray->draw_start)
 	{
 		mlx_put_pixel(utils->img, x, y, utils->data->ceiling);
 		y++;
 	}
-	*/
-    draw_wall(utils, y, x);
-	/*
+    draw_wall(utils, &y, x);
 	while(y < IMG_HEIGHT)
 	{
 		mlx_put_pixel(utils->img, x, y, utils->data->floor);
 		y++;
 	}
-	*/
 	return;
 }
 
