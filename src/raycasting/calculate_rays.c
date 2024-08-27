@@ -136,6 +136,7 @@ void	raycasting(t_utils *utils)
 	int	column;
 	int	screen_width;
 
+    mlx_delete_image(utils->mlx, utils->img);
 	column = 0;
 	screen_width = IMG_WIDTH;
 	while (column < screen_width)
@@ -144,10 +145,7 @@ void	raycasting(t_utils *utils)
 		printf("FUERA: utils-> DeltaDist: %f\n", utils->ray->deltaDistX);
 		get_collision(utils, utils->ray);
 		get_walls_height(utils->ray, utils->player);
-	//	draw_wall_column(utils, column);
-	//	printf("RAYO %d: RayDirX = %f, RayDirY = %f\n", column, utils->ray->rayDirX, utils->ray->rayDirY);
 		column++;
 	}
-	//mlx_image_to_window(utils->mlx, utils->img, 0, 0);
 	return ;
 }
