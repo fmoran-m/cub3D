@@ -95,9 +95,9 @@ static double get_ray_impact(t_ray *ray, t_player *player)
 	double square_impact;
 
 	if (ray->side == VERTICAL_AXIS)
-		square_impact = (player->pos_y + ray->wall_dist) * ray->ray_dir_y;
+		square_impact = player->pos_y + ray->wall_dist * ray->ray_dir_y;
 	else
-		square_impact = (player->pos_x + ray->wall_dist) * ray->ray_dir_x;
+		square_impact = player->pos_x + ray->wall_dist * ray->ray_dir_x;
 	return (square_impact);
 }
 
@@ -108,7 +108,7 @@ static int	get_text_x(t_ray *ray, t_img text, double square_impact)
 	text_x = (int)(square_impact * text.display->width);
 	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x > 0) 
 		text_x = text.display->width - text_x - 1;
-	if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0) 
+	else if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0) 
 		text_x = text.display->width - text_x - 1;
 	return text_x;
 }
