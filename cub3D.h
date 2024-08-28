@@ -29,7 +29,7 @@
 # define C_COMMA_1	13
 # define C_COMMA_2	14
 
-# define IMG_WIDTH	720
+# define IMG_WIDTH  720
 # define IMG_HEIGHT	480
 
 # define TRUE 1

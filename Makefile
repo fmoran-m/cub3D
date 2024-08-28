@@ -32,7 +32,7 @@ SRC = src/main.c \
 
 OBJS = ${SRC:.c=.o}
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB) $(INCLUDES)
 	$(CC) $(OBJS) $(LIBFT) $(MLX) $(CFLAGS) -o $(NAME)
 
 %.o:%.c

@@ -189,7 +189,7 @@ void	draw_line(t_utils *utils, int x)
 {
 	int 		y;
 
-    y = utils->ray->draw_start;
+    y = 0;
 	while(y < utils->ray->draw_start)
 	{
 		mlx_put_pixel(utils->img, x, y, utils->data->ceiling);

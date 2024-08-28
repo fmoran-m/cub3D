@@ -43,17 +43,17 @@ static int	control_comma(char *line, int *status, int i)
 static void	load_channel(t_data *data, int color, int *status)
 {
 	if (*status == FLOOR_1)
-		data->floor = data->floor | (color << 16);
+		data->floor = data->floor | (color << 24);
 	else if (*status == FLOOR_2)
-		data->floor = data->floor | (color << 8);
+		data->floor = data->floor | (color << 16);
 	else if (*status == FLOOR_3)
-		data->floor = data->floor | color;
+		data->floor = data->floor | (color << 8);
 	else if (*status == CEL_1)
-		data->ceiling = data->ceiling | (color << 16);
+		data->ceiling = data->ceiling | (color << 24);
 	else if (*status == CEL_2)
-		data->ceiling = data->ceiling | (color << 8);
+		data->ceiling = data->ceiling | (color << 16);
 	else if (*status == CEL_3)
-		data->ceiling = data->ceiling | color;
+		data->ceiling = data->ceiling | (color << 8);
 }
 
 static int	control_num(t_data *data, char *line, int *status, int i)

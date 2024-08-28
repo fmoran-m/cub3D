@@ -3,8 +3,8 @@ EA ./textures/doom/Doom2.xpm42
 WE ./textures/doom/Doom3.xpm42
 SO ./textures/doom/Doom4.xpm42
 
-F 200, 1, 1 
-C 200, 1, 1 
+F 200, 0, 27 
+C 140, 50, 0 
 
 
 
