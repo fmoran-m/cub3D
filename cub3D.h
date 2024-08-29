@@ -70,23 +70,12 @@ typedef struct s_data
 	char				*east;
 	char				*west;
 	unsigned int		floor;
-	unsigned int		ceiling; // Hasta aquí para usar en las operaciones matemáticas
+	unsigned int		ceiling;
 	size_t				empty_lines;
-	int					c_flag; //Ceiling relleno
-	int					f_flag; //Flag relleno
-	int					data_fill; //Todos los datos se han completado
+	int					c_flag;
+	int					f_flag;
+	int					data_fill;
 }	t_data;
-
-typedef	struct s_line
-{
-	int					x; // x coordinate of line relative to the screen
-	int					y; // the current pixel index of the line (along y axis)
-	int					y0; // y start index of drawing texture
-	int					y1; // y end index of drawing texture
-	int					tex_x; // x coordinate of texture to draw
-	int					tex_y; // y coordinate of texture to draw
-}	t_line;
-
 
 typedef	struct s_player
 {
@@ -144,8 +133,6 @@ typedef struct s_utils
 	t_map		*map;
 	t_player	*player;
 	t_ray		*ray;
-	t_line		*line;
-	// Mover esto a un struct graphs?
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_graphs	*text;

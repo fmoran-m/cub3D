@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 16:52:22 by nvillalt          #+#    #+#             */
+/*   Updated: 2024/08/29 17:13:17 by nvillalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3D.h"
 
 static void	dda_algorithm(t_ray *ray, t_map *map)
@@ -34,7 +46,8 @@ static void	steps_initialisation(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x)
+			* ray->delta_dist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
@@ -44,7 +57,8 @@ static void	steps_initialisation(t_ray *ray, t_player *player)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y)
+			* ray->delta_dist_y;
 	}
 }
 
@@ -67,10 +81,8 @@ static void	init_calculations(t_ray *ray, t_player *player, int x)
 	ray->ray_dir_y = player->dir_y + player->plane_y * ray->normalise;
 }
 
-static void get_line_height(t_ray *ray, t_player *player)
+static void	get_line_height(t_ray *ray, t_player *player)
 {
-	// Wall x -> represents the exact value where the wall was hit, not just the integer coordinates of the wall. 
-	// This is required to know which x-coordinate of the texture we have to use.
 	if (ray->side == VERTICAL_AXIS)
 	{
 		ray->wall_dist = ray->side_dist_x - ray->delta_dist_x;
@@ -90,9 +102,9 @@ static void get_line_height(t_ray *ray, t_player *player)
 		ray->draw_end = IMG_HEIGHT - 1;
 }
 
-static double get_ray_impact(t_ray *ray, t_player *player)
+static double	get_ray_impact(t_ray *ray, t_player *player)
 {
-	double square_impact;
+	double	square_impact;
 
 	if (ray->side == VERTICAL_AXIS)
 		square_impact = player->pos_y + ray->wall_dist * ray->ray_dir_y;
@@ -103,17 +115,17 @@ static double get_ray_impact(t_ray *ray, t_player *player)
 
 static int	get_text_x(t_ray *ray, t_img text, double square_impact)
 {
-	int text_x;
+	int	text_x;
 
 	text_x = (int)(square_impact * text.display->width);
-	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x > 0) 
+	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x > 0)
 		text_x = text.display->width - text_x - 1;
-	else if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0) 
+	else if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0)
 		text_x = text.display->width - text_x - 1;
 	return (text_x);
 }
 
-static double get_step(t_ray *ray, t_img text)
+static double	get_step(t_ray *ray, t_img text)
 {
 	double	step;
 
@@ -123,35 +135,36 @@ static double get_step(t_ray *ray, t_img text)
 
 double	get_text_pos(t_ray *ray, double step)
 {
-	double text_pos;
+	double	text_pos;
 
-	text_pos = (ray->draw_start - IMG_HEIGHT / 2 + ray->line / 2) * step;
+	text_pos = (ray->draw_start - IMG_HEIGHT / 2 + ray->line / 2)
+		* step;
 	return (text_pos);
 }
 
 int	get_text_color(int text_x, int text_y, t_img texture)
 {
-	uint32_t color;
-	uint32_t i;
+	uint32_t	color;
+	uint32_t	i;
 
 	color = 0;
 	i = (texture.display->width * text_y + text_x) * 4;
 	color |= texture.display->pixels[i] << 24;
 	color |= texture.display->pixels[i + 1] << 16;
-	color |= texture.display->pixels[i + 2] << 8; 
+	color |= texture.display->pixels[i + 2] << 8;
 	color |= texture.display->pixels[i + 3];
-	return color;
+	return (color);
 }
 
-static t_img    select_texture(t_ray *ray, t_img *text)
+static t_img	select_texture(t_ray *ray, t_img *text)
 {
-    if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y <= 0)
-        return (text[0]);
-    if (ray->side == VERTICAL_AXIS && ray->ray_dir_x >= 0)
-        return (text[1]);
-    if (ray->side == VERTICAL_AXIS && ray->ray_dir_x < 0)
-        return (text[2]);
-    return(text[3]);
+	if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y <= 0)
+		return (text[0]);
+	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x >= 0)
+		return (text[1]);
+	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x < 0)
+		return (text[2]);
+	return (text[3]);
 }
 
 static void	draw_wall(t_utils *utils, int *y, int x)
@@ -160,45 +173,45 @@ static void	draw_wall(t_utils *utils, int *y, int x)
 	int			text_x;
 	int			text_y;
 	uint32_t	color;
-    t_img       texture;
+	t_img		texture;
 	double		text_pos;
 	double		step;
 
 	square_impact = get_ray_impact(utils->ray, utils->player);
 	square_impact -= floor(square_impact);
-    texture = select_texture(utils->ray, utils->text->text);
+	texture = select_texture(utils->ray, utils->text->text);
 	text_x = get_text_x(utils->ray, texture, square_impact);
 	step = get_step(utils->ray, texture);
 	text_pos = get_text_pos(utils->ray, step);
-	while(*y < utils->ray->draw_end)
+	while (*y < utils->ray->draw_end)
 	{
 		text_y = (int)text_pos & (texture.display->height - 1);
 		text_pos += step;
 		color = get_text_color(text_x, text_y, texture);
 		mlx_put_pixel(utils->img, x, *y, color);
-        *y = *y + 1;
+		*y = *y + 1;
 	}
-	return;
+	return ;
 }
 
 void	draw_line(t_utils *utils, int x)
 {
-	int 		y;
+	int	y;
 
-    y = 0;
-	while(y < utils->ray->draw_start)
+	y = 0;
+	while (y < utils->ray->draw_start)
 	{
 		mlx_put_pixel(utils->img, x, y, utils->data->ceiling);
 		y++;
 	}
-    y = utils->ray->draw_start;
-    draw_wall(utils, &y, x);
-	while(y < IMG_HEIGHT)
+	y = utils->ray->draw_start;
+	draw_wall(utils, &y, x);
+	while (y < IMG_HEIGHT)
 	{
 		mlx_put_pixel(utils->img, x, y, utils->data->floor);
 		y++;
 	}
-	return;
+	return ;
 }
 
 void	raycasting(t_utils *utils)
