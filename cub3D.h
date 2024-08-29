@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
+/*   Updated: 2024/08/29 20:50:13 by nvillalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -77,7 +89,7 @@ typedef struct s_data
 	int					data_fill;
 }	t_data;
 
-typedef	struct s_player
+typedef struct s_player
 {
 	double				pos_x;
 	double				pos_y;
@@ -126,7 +138,7 @@ typedef struct s_graphs
 	double	step;
 }	t_graphs;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	int		text_x;
 	int		text_y;
@@ -136,16 +148,15 @@ typedef struct	s_texture
 
 typedef struct s_move
 {
-	double      speed;
+	double		speed;
 	double		theta;
-    double      old_dir_x;
-    double      old_dir_y;
+	double		old_dir_x;
+	double		old_dir_y;
 	double		old_plane_x;
 	double		old_plane_y;
-	double 		new_pos_x;
-	double 		new_pos_y;
+	double		new_pos_x;
+	double		new_pos_y;
 }	t_move;
-
 
 typedef struct s_utils
 {
@@ -158,6 +169,7 @@ typedef struct s_utils
 	t_graphs	*text;
 }	t_utils;
 
+// parse functions
 void		init_data(t_data *data);
 void		init_utils(t_utils *utils);
 void		free_structs(t_utils *utils);
@@ -178,29 +190,30 @@ int			ft_isnum(char c);
 int			is_correct_char(char c);
 int			is_map_char(char c);
 
-int			print_error(int	type);
+// handle_error
+int			print_error(int type);
 
 // play_game.c
 void		raycasting(t_utils *utils);
 void		play_game(t_utils *utils);
 
 // line_and_wall.c
-void	draw_line(t_utils *utils, int x);
-void	get_line_height(t_ray *ray, t_player *player);
+void		draw_line(t_utils *utils, int x);
+void		get_line_height(t_ray *ray, t_player *player);
 
 // movements.c
-void	inputs(t_utils *utils);
+void		inputs(t_utils *utils);
 
 // movements_hit.c
-int		check_hit_y(t_player *player, t_map *map, double new_pos_y);
-int		check_hit_x(t_player *player, t_map *map, double new_pos_x);
+int			check_hit_y(t_player *player, t_map *map, double new_pos_y);
+int			check_hit_x(t_player *player, t_map *map, double new_pos_x);
 
 // texture_calculations.c
-double	get_ray_impact(t_ray *ray, t_player *player);
-double	get_text_pos(t_ray *ray, double step);
-double	get_step(t_ray *ray, t_img text);
-int		get_text_color(int text_x, int text_y, t_img texture);
-int		get_text_x(t_ray *ray, t_img text, double square_impact);
+double		get_ray_impact(t_ray *ray, t_player *player);
+double		get_text_pos(t_ray *ray, double step);
+double		get_step(t_ray *ray, t_img text);
+int			get_text_color(int text_x, int text_y, t_img texture);
+int			get_text_x(t_ray *ray, t_img text, double square_impact);
 
 // player_initialisation
 int			start_player(t_utils *utils);
