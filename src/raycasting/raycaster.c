@@ -110,26 +110,22 @@ static int	get_text_x(t_ray *ray, t_img text, double square_impact)
 		text_x = text.display->width - text_x - 1;
 	else if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0) 
 		text_x = text.display->width - text_x - 1;
-	return text_x;
+	return (text_x);
 }
 
 static double get_step(t_ray *ray, t_img text)
 {
 	double	step;
-	int		line_height;	
 
-	line_height = ray->draw_end - ray->draw_start;
-	step = (float)text.display->height / (float)line_height;
+	step = 1.0 * text.display->height / ray->line;
 	return (step);
 }
 
 double	get_text_pos(t_ray *ray, double step)
 {
 	double text_pos;
-	int		line_height;	
 
-	line_height = ray->draw_end - ray->draw_start;
-	text_pos = (ray->draw_start - IMG_HEIGHT / 2 + line_height / 2) * step;
+	text_pos = (ray->draw_start - IMG_HEIGHT / 2 + ray->line / 2) * step;
 	return (text_pos);
 }
 
@@ -195,6 +191,7 @@ void	draw_line(t_utils *utils, int x)
 		mlx_put_pixel(utils->img, x, y, utils->data->ceiling);
 		y++;
 	}
+    y = utils->ray->draw_start;
     draw_wall(utils, &y, x);
 	while(y < IMG_HEIGHT)
 	{
