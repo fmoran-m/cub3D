@@ -28,7 +28,9 @@ SRC = src/main.c \
 	src/raycasting/print_errors.c \
 	src/raycasting/init_player.c \
 	src/raycasting/play_game.c \
-	src/raycasting/raycaster.c
+	src/raycasting/raycaster.c \
+	src/raycasting/movement.c \
+	src/raycasting/movement_hit.c
 
 OBJS = ${SRC:.c=.o}
 
