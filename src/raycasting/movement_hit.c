@@ -6,13 +6,13 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:27:06 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 17:27:16 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:44:42 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3D.h"
 
-static int	check_hit_x(t_player *player, t_map *map, double new_pos_x)
+int	check_hit_x(t_player *player, t_map *map, double new_pos_x)
 {
 	int	pos_y;
 	int	pos_x;
@@ -24,7 +24,7 @@ static int	check_hit_x(t_player *player, t_map *map, double new_pos_x)
 	return (1);
 }
 
-static int	check_hit_y(t_player *player, t_map *map, double new_pos_y)
+int	check_hit_y(t_player *player, t_map *map, double new_pos_y)
 {
 	int	pos_y;
 	int	pos_x;

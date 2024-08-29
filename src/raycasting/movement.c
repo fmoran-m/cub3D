@@ -6,14 +6,13 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:22:41 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 17:23:10 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:43:24 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3D.h"
 
-
-static void	inputs(t_utils *utils)
+void	inputs(t_utils *utils)
 {
 	double		speed;
 	double		theta;

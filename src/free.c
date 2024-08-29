@@ -6,7 +6,7 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:28:12 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 16:28:13 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:42:42 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	free_structs(t_utils *utils)
 		free(utils->player);
 	if (utils->ray)
 		free(utils->ray);
-	if (utils->line)
-		free(utils->line);
 	if (utils->text)
 	{
 		free_textures(utils->text);

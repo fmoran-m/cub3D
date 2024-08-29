@@ -126,6 +126,13 @@ typedef struct s_graphs
 	double	step;
 }	t_graphs;
 
+typedef struct	s_texture
+{
+	int		text_x;
+	int		text_y;
+	double	text_pos;
+	double	step;
+} t_texture;
 
 typedef struct s_utils
 {
@@ -160,11 +167,27 @@ int			is_map_char(char c);
 
 int			print_error(int	type);
 
-// graphics
-int			start_window(t_utils *utils);
+// play_game.c
 void		raycasting(t_utils *utils);
 void		play_game(t_utils *utils);
 
+// line_and_wall.c
+void	draw_line(t_utils *utils, int x);
+void	get_line_height(t_ray *ray, t_player *player);
+
+// movements.c
+void	inputs(t_utils *utils);
+
+// movements_hit.c
+int		check_hit_y(t_player *player, t_map *map, double new_pos_y);
+int		check_hit_x(t_player *player, t_map *map, double new_pos_x);
+
+// texture_calculations.c
+double	get_ray_impact(t_ray *ray, t_player *player);
+double	get_text_pos(t_ray *ray, double step);
+double	get_step(t_ray *ray, t_img text);
+int		get_text_color(int text_x, int text_y, t_img texture);
+int		get_text_x(t_ray *ray, t_img text, double square_impact);
 // player_initialisation
 int			start_player(t_utils *utils);
 t_player	*init_player(void);

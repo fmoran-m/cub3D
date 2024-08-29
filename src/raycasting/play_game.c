@@ -6,7 +6,7 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 17:23:41 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:28:09 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,6 @@ static int	start_maze(t_utils *utils)
 	}
 	load_textures(utils->text, utils);
 }
-
-static int	check_hit_x(t_player *player, t_map *map, double new_pos_x)
-{
-	int	pos_y;
-	int	pos_x;
-
-	pos_y = floor(player->pos_y);
-	pos_x = floor(new_pos_x);
-	if (map->map[pos_y][pos_x] == '1')
-		return (0);
-	return (1);
-}
-
-static int	check_hit_y(t_player *player, t_map *map, double new_pos_y)
-{
-	int	pos_y;
-	int	pos_x;
-
-	pos_x = (player->pos_x);
-	pos_y = (new_pos_y);
-	if (map->map[pos_y][pos_x] == '1')
-		return (0);
-	return (1);
-}
-
 
 static void	render_image(void *param)
 {

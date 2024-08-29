@@ -30,7 +30,9 @@ SRC = src/main.c \
 	src/raycasting/play_game.c \
 	src/raycasting/raycaster.c \
 	src/raycasting/movement.c \
-	src/raycasting/movement_hit.c
+	src/raycasting/movement_hit.c \
+	src/raycasting/line_and_wall.c \
+	src/raycasting/texture_calculations.c
 
 OBJS = ${SRC:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:52:22 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 17:13:17 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:31:07 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,139 +79,6 @@ static void	init_calculations(t_ray *ray, t_player *player, int x)
 	ray->normalise = 2 * x / (double)IMG_WIDTH - 1;
 	ray->ray_dir_x = player->dir_x + player->plane_x * ray->normalise;
 	ray->ray_dir_y = player->dir_y + player->plane_y * ray->normalise;
-}
-
-static void	get_line_height(t_ray *ray, t_player *player)
-{
-	if (ray->side == VERTICAL_AXIS)
-	{
-		ray->wall_dist = ray->side_dist_x - ray->delta_dist_x;
-		ray->wall_x = player->pos_y + ray->wall_dist * ray->ray_dir_y;
-	}
-	else if (ray->side == HORIZONAL_AXIS)
-	{
-		ray->wall_dist = ray->side_dist_y - ray->delta_dist_y;
-		ray->wall_x = player->pos_x + ray->wall_dist * ray->ray_dir_x;
-	}
-	ray->line = (int)(IMG_HEIGHT / ray->wall_dist);
-	ray->draw_start = -ray->line / 2 + IMG_HEIGHT / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line / 2 + IMG_HEIGHT / 2;
-	if (ray->draw_end >= IMG_HEIGHT)
-		ray->draw_end = IMG_HEIGHT - 1;
-}
-
-static double	get_ray_impact(t_ray *ray, t_player *player)
-{
-	double	square_impact;
-
-	if (ray->side == VERTICAL_AXIS)
-		square_impact = player->pos_y + ray->wall_dist * ray->ray_dir_y;
-	else
-		square_impact = player->pos_x + ray->wall_dist * ray->ray_dir_x;
-	return (square_impact);
-}
-
-static int	get_text_x(t_ray *ray, t_img text, double square_impact)
-{
-	int	text_x;
-
-	text_x = (int)(square_impact * text.display->width);
-	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x > 0)
-		text_x = text.display->width - text_x - 1;
-	else if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0)
-		text_x = text.display->width - text_x - 1;
-	return (text_x);
-}
-
-static double	get_step(t_ray *ray, t_img text)
-{
-	double	step;
-
-	step = 1.0 * text.display->height / ray->line;
-	return (step);
-}
-
-double	get_text_pos(t_ray *ray, double step)
-{
-	double	text_pos;
-
-	text_pos = (ray->draw_start - IMG_HEIGHT / 2 + ray->line / 2)
-		* step;
-	return (text_pos);
-}
-
-int	get_text_color(int text_x, int text_y, t_img texture)
-{
-	uint32_t	color;
-	uint32_t	i;
-
-	color = 0;
-	i = (texture.display->width * text_y + text_x) * 4;
-	color |= texture.display->pixels[i] << 24;
-	color |= texture.display->pixels[i + 1] << 16;
-	color |= texture.display->pixels[i + 2] << 8;
-	color |= texture.display->pixels[i + 3];
-	return (color);
-}
-
-static t_img	select_texture(t_ray *ray, t_img *text)
-{
-	if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y <= 0)
-		return (text[0]);
-	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x >= 0)
-		return (text[1]);
-	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x < 0)
-		return (text[2]);
-	return (text[3]);
-}
-
-static void	draw_wall(t_utils *utils, int *y, int x)
-{
-	double		square_impact;
-	int			text_x;
-	int			text_y;
-	uint32_t	color;
-	t_img		texture;
-	double		text_pos;
-	double		step;
-
-	square_impact = get_ray_impact(utils->ray, utils->player);
-	square_impact -= floor(square_impact);
-	texture = select_texture(utils->ray, utils->text->text);
-	text_x = get_text_x(utils->ray, texture, square_impact);
-	step = get_step(utils->ray, texture);
-	text_pos = get_text_pos(utils->ray, step);
-	while (*y < utils->ray->draw_end)
-	{
-		text_y = (int)text_pos & (texture.display->height - 1);
-		text_pos += step;
-		color = get_text_color(text_x, text_y, texture);
-		mlx_put_pixel(utils->img, x, *y, color);
-		*y = *y + 1;
-	}
-	return ;
-}
-
-void	draw_line(t_utils *utils, int x)
-{
-	int	y;
-
-	y = 0;
-	while (y < utils->ray->draw_start)
-	{
-		mlx_put_pixel(utils->img, x, y, utils->data->ceiling);
-		y++;
-	}
-	y = utils->ray->draw_start;
-	draw_wall(utils, &y, x);
-	while (y < IMG_HEIGHT)
-	{
-		mlx_put_pixel(utils->img, x, y, utils->data->floor);
-		y++;
-	}
-	return ;
 }
 
 void	raycasting(t_utils *utils)
