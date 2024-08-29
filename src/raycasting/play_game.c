@@ -39,23 +39,27 @@ static void	start_maze(t_utils *utils)
 static int	check_hit_x(t_player *player, t_map *map, double new_pos_x)
 {
 	int	pos_y;
-	int pos_x;
+	int max_pos_x;
+	int min_pos_x;
 
+	max_pos_x = floor((new_pos_x) + 0.1);
+	min_pos_x = floor((new_pos_x) - 0.1);
 	pos_y = floor(player->pos_y);
-	pos_x = floor(new_pos_x);
-	if (map->map[pos_y][pos_x] == '1')
+	if (map->map[pos_y][max_pos_x] == '1' || map->map[pos_y][min_pos_x] == '1')
 		return 0;
 	return 1;
 }
 
 static int	check_hit_y(t_player *player, t_map *map, double new_pos_y)
 {
-	int	pos_y;
+	int	max_pos_y;
+	int	min_pos_y;
 	int pos_x;
 
-	pos_x = (player->pos_x);
-	pos_y = (new_pos_y);
-	if (map->map[pos_y][pos_x] == '1')
+	pos_x = floor((player->pos_x));
+	max_pos_y = floor((new_pos_y) + 0.1);
+	min_pos_y = floor((new_pos_y) - 0.1);
+	if (map->map[max_pos_y][pos_x] == '1' || map->map[min_pos_y][pos_x] == '1')
 		return 0;
 	return 1;
 }
@@ -83,44 +87,36 @@ static void inputs(t_utils *utils)
     {
 		new_pos_x = utils->player->pos_x + utils->player->dir_x * speed; 
 		new_pos_y = utils->player->pos_y + utils->player->dir_y * speed; 
-		if (check_hit_x(utils->player, utils->map, new_pos_x)
-			&& check_hit_y(utils->player, utils->map, new_pos_y))
+		if (check_hit_x(utils->player, utils->map, new_pos_x))
 			utils->player->pos_x = new_pos_x;
-		if (check_hit_y(utils->player, utils->map, new_pos_y)
-			&& check_hit_x(utils->player, utils->map, new_pos_x))
+		if (check_hit_y(utils->player, utils->map, new_pos_y))
  			utils->player->pos_y = new_pos_y;
     }
     else if (mlx_is_key_down(utils->mlx, MLX_KEY_S))
     {
 		new_pos_x = utils->player->pos_x - utils->player->dir_x * speed; 
 		new_pos_y = utils->player->pos_y - utils->player->dir_y * speed; 
-		if (check_hit_x(utils->player, utils->map, new_pos_x)
-			&& check_hit_y(utils->player, utils->map, new_pos_y))
+		if (check_hit_x(utils->player, utils->map, new_pos_x))
             utils->player->pos_x -= utils->player->dir_x * speed;
-		if (check_hit_y(utils->player, utils->map, new_pos_y)
-			&& check_hit_x(utils->player, utils->map, new_pos_x))
+		if (check_hit_y(utils->player, utils->map, new_pos_y))
             utils->player->pos_y -= utils->player->dir_y * speed;
     }
 	else if (mlx_is_key_down(utils->mlx, MLX_KEY_D))
     {
 		new_pos_x = utils->player->pos_x + utils->player->plane_x * speed; 
 		new_pos_y = utils->player->pos_y + utils->player->plane_y * speed; 
-		if (check_hit_x(utils->player, utils->map, new_pos_x)
-			&& check_hit_y(utils->player, utils->map, new_pos_y))
+		if (check_hit_x(utils->player, utils->map, new_pos_x))
         	utils->player->pos_x = new_pos_x;
-		if (check_hit_y(utils->player, utils->map, new_pos_y)
-			&& check_hit_x(utils->player, utils->map, new_pos_x))
+		if (check_hit_y(utils->player, utils->map, new_pos_y))
         	utils->player->pos_y = new_pos_y;
     }
 	else if (mlx_is_key_down(utils->mlx, MLX_KEY_A))
 	{
 		new_pos_x = utils->player->pos_x - utils->player->plane_x * speed; 
 		new_pos_y = utils->player->pos_y - utils->player->plane_y * speed; 
-		if (check_hit_x(utils->player, utils->map, new_pos_x)
-			&& check_hit_y(utils->player, utils->map, new_pos_y))
+		if (check_hit_x(utils->player, utils->map, new_pos_x))
         	utils->player->pos_x = new_pos_x;
-		if (check_hit_y(utils->player, utils->map, new_pos_y)
-			&& check_hit_x(utils->player, utils->map, new_pos_x))
+		if (check_hit_y(utils->player, utils->map, new_pos_y))
         	utils->player->pos_y = new_pos_y;
 	}
     else if (mlx_is_key_down(utils->mlx, MLX_KEY_RIGHT))

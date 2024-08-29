@@ -8,7 +8,6 @@ int	start_window(t_utils *utils)
 	if (!utils->mlx)
 		return (print_error(MLX_ERROR));
 	raycasting(utils);
-	//mlx_loop_hook(utils->mlx, raycasting, utils);
 	mlx_loop(utils->mlx);
 	mlx_terminate(utils->mlx);
 	return (FUNC_SUCC);
