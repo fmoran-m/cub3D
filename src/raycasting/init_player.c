@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_player.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 16:35:46 by nvillalt          #+#    #+#             */
+/*   Updated: 2024/08/29 16:36:12 by nvillalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3D.h"
 
-// Ojo con esta función en caso de que la mlx esté graciosa y sea moviendose en Y vs X
 static void	get_player_direction(t_player *player, char dir)
 {
 	if (dir == 'W')
@@ -23,7 +34,7 @@ static void	get_player_direction(t_player *player, char dir)
 		player->dir_x = 0;
 		player->dir_y = 1;
 	}
-	player->plane_x = player->dir_y * FOV; // Antes esto tenia un negativo, revisar 
+	player->plane_x = player->dir_y * FOV;
 	player->plane_y = player->dir_x * FOV;
 	return ;
 }

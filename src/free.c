@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 16:28:12 by nvillalt          #+#    #+#             */
+/*   Updated: 2024/08/29 16:28:13 by nvillalt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 static void	free_textures(t_graphs *text)
- {
+{
 	if (text->text[0].text != NULL)
 		mlx_delete_xpm42(text->text[0].text);
-	if (text->text[1].text  != NULL)
+	if (text->text[1].text != NULL)
 		mlx_delete_xpm42(text->text[1].text);
-	if (text->text[2].text  != NULL)
+	if (text->text[2].text != NULL)
 		mlx_delete_xpm42(text->text[2].text);
-	if (text->text[3].text  != NULL)
+	if (text->text[3].text != NULL)
 		mlx_delete_xpm42(text->text[3].text);
- }
+}
 
 void	free_structs(t_utils *utils)
 {
