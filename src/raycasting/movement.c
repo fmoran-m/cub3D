@@ -6,7 +6,7 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:22:41 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 20:41:20 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:55:16 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,5 @@ void	inputs(t_utils *utils)
 		spin_move(&move, utils, 0);
 	else if (mlx_is_key_down(utils->mlx, MLX_KEY_LEFT))
 		spin_move(&move, utils, 1);
-	return ;
-}
-
-static void	render_image(void *param)
-{
-	t_utils	*utils;
-
-	utils = (t_utils *)param;
-	mlx_delete_image(utils->mlx, utils->img);
-	raycasting(utils);
-	mlx_image_to_window(utils->mlx, utils->img, 0, 0);
-	inputs(utils);
 	return ;
 }

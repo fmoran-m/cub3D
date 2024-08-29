@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/08/29 20:53:26 by nvillalt          #+#    #+#              #
+#    Updated: 2024/08/29 20:53:32 by nvillalt         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D 
 
 LIBFT = ./libft/libft.a
@@ -9,7 +21,7 @@ MLX = $(MLX_LIB) -ldl -lglfw -pthread -lm
 
 CC = cc
 LM = make -C
-CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror
 
 
 INCLUDES = cub3D.h mlx/include/MLX42/MLX42.h

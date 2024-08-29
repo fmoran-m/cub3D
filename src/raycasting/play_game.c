@@ -6,7 +6,7 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 20:19:08 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:54:27 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	start_maze(t_utils *utils)
 			return (free_structs(utils), EXIT_FAILURE);
 	}
 	load_textures(utils->text, utils);
+	return (FUNC_SUCC);
 }
 
 static void	render_image(void *param)
