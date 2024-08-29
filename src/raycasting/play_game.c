@@ -6,7 +6,7 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 17:28:09 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:19:08 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	render_image(void *param)
 	raycasting(utils);
 	mlx_image_to_window(utils->mlx, utils->img, 0, 0);
 	inputs(utils);
-	return;
+	return ;
 }
 
 void	play_game(t_utils *utils)

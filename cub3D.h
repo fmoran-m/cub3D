@@ -132,7 +132,20 @@ typedef struct	s_texture
 	int		text_y;
 	double	text_pos;
 	double	step;
-} t_texture;
+}	t_texture;
+
+typedef struct s_move
+{
+	double      speed;
+	double		theta;
+    double      old_dir_x;
+    double      old_dir_y;
+	double		old_plane_x;
+	double		old_plane_y;
+	double 		new_pos_x;
+	double 		new_pos_y;
+}	t_move;
+
 
 typedef struct s_utils
 {
@@ -188,7 +201,9 @@ double	get_text_pos(t_ray *ray, double step);
 double	get_step(t_ray *ray, t_img text);
 int		get_text_color(int text_x, int text_y, t_img texture);
 int		get_text_x(t_ray *ray, t_img text, double square_impact);
+
 // player_initialisation
 int			start_player(t_utils *utils);
 t_player	*init_player(void);
+
 #endif
