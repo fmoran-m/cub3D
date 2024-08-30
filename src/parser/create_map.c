@@ -17,7 +17,7 @@ static int	validate_line(t_map *map, int y, int *zero_flag, int *mapchar_flag)
 		{
 			if (*mapchar_flag == 1)
 			{
-				ft_putendl_fd("Error, incorrect format", 2);
+				ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 				return (0);
 			}
 			*mapchar_flag = 1;
@@ -44,7 +44,7 @@ static int	validate_map(t_map *map)
 	}
 	if (zero_flag == 0)
 	{
-		ft_putendl_fd("Error, incorrect format", 2);
+		ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 		return (0);
 	}
 	return (1);

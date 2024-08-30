@@ -24,7 +24,7 @@ static int	get_to_map(char *line, int *status, t_data *data)
 	i = 0;
 	while (line[i])
 	{
-		if (!is_correct_char(line[i]))
+		if (!avoid_spaces(line[i]) && !is_map_char(line[i]))
 		{
 			ft_putendl_fd(INC_FORMAT, STDOUT_FILENO);
 			return (0);

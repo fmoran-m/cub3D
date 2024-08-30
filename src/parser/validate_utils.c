@@ -24,7 +24,7 @@ int	check_middle_square(t_map *map, int y, int x)
 		|| null_avoid_spaces(map->map[y + 1][x])
 		|| null_avoid_spaces(map->map[y + 1][x + 1]))
 	{
-		ft_putendl_fd("Error, incorrect format", 2);
+		ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 		return (0);
 	}
 	return (1);

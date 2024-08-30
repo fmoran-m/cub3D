@@ -1,15 +1,10 @@
-NO ./textures/doom/Doom1.xpm
+NO./textures/doom/Doom1.xpm42
 EA ./textures/doom/Doom2.xpm42
 WE ./textures/doom/Doom3.xpm42
 SO ./textures/doom/Doom4.xpm42
 
 F 200, 0, 27 
 C 140, 50, 0 
-
-
-
-
-
 
         1111111111111111111111111
         1000000000110010000000001

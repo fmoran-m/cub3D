@@ -16,7 +16,7 @@
 # define ARGC_ERR "Error: This program requires only 1 argument"
 # define EXT_ERR  "Error: Invalid file extension"
 # define FILE_NOT_FOUND "Error: File not found"
-# define INC_FORMAT "Error: Incorrect format"
+# define INC_FORMAT "Error: Incorrect data format"
 # define INC_FORMAT_MAP "Error: Incorrect map format"
 # define INC_FORMAT_PLY "Error: Multiple player positions declarations"
 # define MLX_ERROR_MSG "Error: Incorrect mlx initialisation"

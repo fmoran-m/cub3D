@@ -26,7 +26,7 @@ static int	control_comma(char *line, int *status, int i)
 {
 	if (line[i] != ',')
 	{
-		ft_putendl_fd("Error, incorrect format", 2);
+		ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 		return (0);
 	}
 	if (*status == F_COMMA_1)
@@ -66,13 +66,13 @@ static int	control_num(t_data *data, char *line, int *status, int i)
 		i++;
 	if (!avoid_spaces(line[i]) && line[i] != ',')
 	{
-		ft_putendl_fd("Error, incorrect format", 2);
+		ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 		return (0);
 	}
 	temp_num = ft_atoi(line + start);
 	if (temp_num < 0 || temp_num > 255)
 	{
-		ft_putendl_fd("Error, incorrect format", 2);
+		ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 		return (0);
 	}
 	load_channel(data, temp_num, status);
