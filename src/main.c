@@ -1,7 +1,18 @@
 #include "../cub3D.h"
 #include <stdio.h>
 
-// Revisar el parseo del xpm porque se tiene que poner xpm42
+static int	xpm_checker(t_data *data)
+{
+	if (!file_checker(data->north, ".xpm42"))
+		return (0);
+	if (!file_checker(data->west, ".xpm42"))
+		return (0);
+	if (!file_checker(data->east, ".xpm42"))
+		return (0);
+	if (!file_checker(data->south, ".xpm42"))
+		return (0);
+	return (1);
+}
 
 int	main(int argc, char **argv)
 {
@@ -14,19 +25,29 @@ int	main(int argc, char **argv)
 		ft_putendl_fd(ARGC_ERR, STDERR_FILENO);
 		return (EXIT_ERR);
 	}
-	file_checker(argv[1]);
+	if (!file_checker(argv[1], ".cub"))
+	{
+		ft_putendl_fd(EXT_ERR, STDERR_FILENO);
+		return (EXIT_ERR);
+	}
 	utils.data = &data;
 	utils.map = &map;
 	init_utils(&utils);
 	if (!parse_file(&utils, argv[1]))
 	{
 		free_structs(&utils);
-		return (1);
+		return (EXIT_ERR);
+	}
+	if (!xpm_checker(utils.data))
+	{
+		ft_putendl_fd(XPM_ERR, STDERR_FILENO);
+		free_structs(&utils);
+		return (EXIT_ERR);
 	}
 	if (!create_map(&utils, argv[1]))
 	{
 		free_structs(&utils);
-		return (1);
+		return (EXIT_ERR);
 	}
 	play_game(&utils);
 	free_structs(&utils);

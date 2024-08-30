@@ -17,9 +17,13 @@
 # define EXT_ERR  "Error: Invalid file extension"
 # define FILE_NOT_FOUND "Error: File not found"
 # define INC_FORMAT "Error: Incorrect format"
+# define INC_FORMAT_MAP "Error: Incorrect map format"
+# define INC_FORMAT_PLY "Error: Multiple player positions declarations"
 # define MLX_ERROR_MSG "Error: Incorrect mlx initialisation"
 # define MEM_ERROR_MSG "Error: Incorrect memory allocation"
 # define MLX_IMG_ERROR "Error: Couldn't initialise image"
+# define XPM_ERR "Error: Incorrect image extension"
+# define PATH_ERR "Error: Path does not exist"
 
 # define EXIT_ERR	1
 # define FUNC_FAIL	0
@@ -174,7 +178,7 @@ typedef struct s_utils
 void		init_data(t_data *data);
 void		init_utils(t_utils *utils);
 void		free_structs(t_utils *utils);
-void		file_checker(char *argv);
+int			file_checker(char *argv, char *ext);
 int			parse_file(t_utils *utils, char *file);
 int			save_path(t_data *data, char *line, int *status);
 int			check_params(t_data *data);

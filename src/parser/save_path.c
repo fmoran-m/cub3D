@@ -32,7 +32,7 @@ static char	*get_path(char *line, int *i)
 	dup = ft_substr(line, start, n);
 	if (!dup)
 	{
-		ft_putendl_fd("Error: Memory allocation", STDERR_FILENO);
+		ft_putendl_fd(MEM_ERROR_MSG, STDERR_FILENO);
 		return (NULL);
 	}
 	return (dup);
@@ -52,7 +52,7 @@ int	save_path(t_data *data, char *line, int *status)
 	if (fd == -1) //OJO PERMISOS
 	{
 		free(dup);
-		ft_putendl_fd("Error: Path does not exist", STDERR_FILENO);
+		ft_putendl_fd(PATH_ERR, STDERR_FILENO);
 		return (0);
 	}
 	close(fd);

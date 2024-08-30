@@ -26,7 +26,7 @@ static int	get_to_map(char *line, int *status, t_data *data)
 	{
 		if (!is_correct_char(line[i]))
 		{
-			ft_putendl_fd("Error, incorrect format", 2);
+			ft_putendl_fd(INC_FORMAT, STDOUT_FILENO);
 			return (0);
 		}
 		if (is_map_char(line[i]))
@@ -56,9 +56,9 @@ static int	check_map(char *line, t_map *map, t_data *data)
 	while (line[i] && line[i] != '\n')
 	{
 		if (!is_correct_char(line[i]))
-			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
+			return (ft_putendl_fd(INC_FORMAT_MAP, STDOUT_FILENO), 0);
 		if (is_dir_char(line[i]) && data->dir_flag)
-			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
+			return (ft_putendl_fd(INC_FORMAT_PLY, STDOUT_FILENO), 0);
 		if (is_dir_char(line[i]))
 			data->dir_flag = 1;
 		i++;

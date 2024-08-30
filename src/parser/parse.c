@@ -23,7 +23,7 @@ static int	change_status(t_data *data, char *line, int *status)
 		return (i);
 	else
 	{
-		ft_putendl_fd("Error, incorrect format", STDERR_FILENO);
+		ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 		return (0);
 	}
 }
@@ -62,7 +62,10 @@ static int	parse_line(t_utils *utils, char *line, int *status)
 		while (line[i])
 		{
 			if (!avoid_spaces(line[i]))
+			{
+				ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
 				return (0);
+			}
 			i++;
 		}
 	}
