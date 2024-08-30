@@ -86,6 +86,7 @@ typedef struct s_data
 	size_t				empty_lines;
 	int					c_flag;
 	int					f_flag;
+	int					dir_flag;
 	int					data_fill;
 }	t_data;
 

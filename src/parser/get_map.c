@@ -40,35 +40,36 @@ static int	get_to_map(char *line, int *status, t_data *data)
 	return (1);
 }
 
-static int	check_map(char *line, int *space_flag, t_map *map)
+static int	is_dir_char(char c)
+{
+	if (c == 'N' || c == 'E'
+	|| c == 'W' || c == 'S')
+		return (1);
+	return (0);
+}
+
+static int	check_map(char *line, t_map *map, t_data *data)
 {
 	int	i;
-	int	char_flag;
 
 	i = 0;
-	char_flag = 0;
 	while (line[i] && line[i] != '\n')
 	{
 		if (!is_correct_char(line[i]))
 			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
-		if (is_map_char(line[i]) && *space_flag == 1)
+		if (is_dir_char(line[i]) && data->dir_flag)
 			return (ft_putendl_fd(INC_FORMAT, STDOUT_FILENO), 0);
-		if (is_map_char(line[i]))
-			char_flag = 1;
+		if (is_dir_char(line[i]))
+			data->dir_flag = 1;
 		i++;
 		if (i > map->map_width)
 			map->map_width = i;
 	}
-	if (char_flag == 0)
-		*space_flag = 1;
 	return (1);
 }
 
 static int	check_map_status(t_utils *utils, char *line, int *status, size_t *n)
 {
-	int	space_flag;
-
-	space_flag = 0;
 	if (*status == 0)
 	{
 		if (!get_to_map(line, status, utils->data))
@@ -76,10 +77,9 @@ static int	check_map_status(t_utils *utils, char *line, int *status, size_t *n)
 	}
 	if (*status == 1)
 	{
-		if (!check_map(line, &space_flag, utils->map))
+		if (!check_map(line, utils->map, utils->data))
 			return (0);
-		if (!space_flag)
-			(*n)++;
+		(*n)++;
 	}
 	return (1);
 }

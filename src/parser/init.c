@@ -47,6 +47,7 @@ void	init_data(t_data *data)
 	data->ceiling = 0x000000ff;
 	data->data_fill = 0;
 	data->empty_lines = 0;
+	data->dir_flag = 0;
 }
 
 t_graphs	*init_graphs(void)

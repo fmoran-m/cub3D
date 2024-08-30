@@ -60,7 +60,7 @@ int	null_avoid_spaces(char c)
 
 int	is_correct_char(char c)
 {
-	if (!avoid_spaces(c) && !is_map_char(c))
+	if (c != 32 && c != '\n' && !is_map_char(c))
 		return (0);
 	else
 		return (1);
