@@ -6,7 +6,7 @@
 /*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:35:46 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 16:36:12 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:35:48 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	start_player(t_utils *utils)
 			if (utils->map->map[y][x] == 'N' || utils->map->map[y][x] == 'E'
 				|| utils->map->map[y][x] == 'S' || utils->map->map[y][x] == 'W')
 			{
+				utils->player->direction = utils->map->map[y][x];
 				utils->player->pos_x = (float)x + 0.5;
 				utils->player->pos_y = (float)y + 0.5;
 				get_player_direction(utils->player, utils->map->map[y][x]);
