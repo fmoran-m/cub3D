@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 16:44:18 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 18:38:59 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ static void	render_image(void *param)
 	mlx_delete_image(utils->mlx, utils->img);
 	raycasting(utils);
 	if (mlx_image_to_window(utils->mlx, utils->img, 0, 0) == -1)
-    {
-        ft_putendl_fd(MLX_DFL_MSG, STDERR_FILENO);
-        free_structs(utils);
-        exit (1);
-    }
+	{
+		ft_putendl_fd(MLX_DFL_MSG, STDERR_FILENO);
+		free_structs(utils);
+		exit(1);
+	}
 	inputs(utils);
 	return ;
 }

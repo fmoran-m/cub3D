@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:52:22 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 17:31:07 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/02 18:43:48 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ void	raycasting(t_utils *utils)
 
 	x = 0;
 	utils->img = mlx_new_image(utils->mlx, IMG_WIDTH, IMG_HEIGHT);
+	if (!utils->img)
+	{
+		ft_putendl_fd(MLX_DFL_MSG, STDERR_FILENO);
+		free_structs(utils);
+		exit(1);
+	}
 	while (x < IMG_WIDTH)
 	{
 		init_calculations(utils->ray, utils->player, x);
