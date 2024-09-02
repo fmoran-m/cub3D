@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 13:50:32 by fmoran-m          #+#    #+#             */
+/*   Updated: 2024/09/02 13:59:33 by fmoran-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3D.h"
 
 void	init_map(t_map *map)
@@ -65,7 +77,7 @@ t_graphs	*init_graphs(void)
 	graphs->text_x = 0;
 	graphs->text_y = 0;
 	graphs->step = 0;
-	return (graphs);	
+	return (graphs);
 }
 
 void	init_utils(t_utils *utils)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_path.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 13:50:48 by fmoran-m          #+#    #+#             */
+/*   Updated: 2024/09/02 13:59:55 by fmoran-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3D.h"
 
 static void	assign_dup(t_data *data, char *dup, int status)
@@ -22,7 +34,7 @@ static char	*get_path(char *line, int *i)
 	while (line[*i] && avoid_spaces(line[*i]))
 		(*i)++;
 	if (!line[*i])
-		return (NULL); //CUIDADO CON ESTO
+		return (NULL);
 	start = *i;
 	while (line[*i] && !avoid_spaces(line[*i]))
 	{
@@ -49,7 +61,7 @@ int	save_path(t_data *data, char *line, int *status)
 	if (!dup)
 		return (0);
 	fd = open(dup, O_RDONLY);
-	if (fd == -1) //OJO PERMISOS
+	if (fd == -1)
 	{
 		free(dup);
 		ft_putendl_fd(PATH_ERR, STDERR_FILENO);

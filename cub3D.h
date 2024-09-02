@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/08/29 20:50:13 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:16:52 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # define MEM_ERROR_MSG "Error: Incorrect memory allocation"
 # define MLX_IMG_ERROR "Error: Couldn't initialise image"
 # define XPM_ERR "Error: Incorrect image extension"
-# define PATH_ERR "Error: Path does not exist"
+# define PATH_ERR "Error: Texture path does not exist"
+# define OPEN_ERR "Error: Cannot open argument file"
 
 # define EXIT_ERR	1
 # define FUNC_FAIL	0
@@ -194,6 +195,8 @@ int			check_space(t_map *map, int y, int x);
 int			ft_isnum(char c);
 int			is_correct_char(char c);
 int			is_map_char(char c);
+int			is_dir_char(char c);
+int			xpm_checker(t_data *data);
 
 // handle_error
 int			print_error(int type);

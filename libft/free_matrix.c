@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_matrix.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 14:14:26 by fmoran-m          #+#    #+#             */
+/*   Updated: 2024/09/02 15:05:22 by fmoran-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	free_matrix(char **matrix)
@@ -5,7 +17,7 @@ void	free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	while(matrix[i])
+	while (matrix[i])
 	{
 		free(matrix[i]);
 		i++;

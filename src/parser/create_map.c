@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 13:50:19 by fmoran-m          #+#    #+#             */
+/*   Updated: 2024/09/02 14:02:49 by fmoran-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3D.h"
 
 static int	validate_line(t_map *map, int y, int *zero_flag, int *mapchar_flag)
@@ -57,7 +69,8 @@ static int	allocate_line(t_map *map, char *line, int i)
 	map->map[i] = ft_calloc(map->map_width + 1, sizeof(char));
 	if (!map->map[i])
 	{
-		ft_putendl_fd("Error, memory allocation", 2); // Liberar toda la matriz
+		free_matrix(map->map);
+		ft_putendl_fd(MEM_ERROR_MSG, STDERR_FILENO);
 		return (0);
 	}
 	j = 0;
@@ -78,7 +91,7 @@ static int	allocate_map(t_utils *utils, int fd)
 	utils->map->map = ft_calloc(utils->map->map_size + 1, sizeof(char *));
 	if (!utils->map->map)
 	{
-		ft_putendl_fd("Error, memory allocation", 2);
+		ft_putendl_fd(MEM_ERROR_MSG, STDERR_FILENO);
 		return (0);
 	}
 	while (i < utils->map->map_size)
@@ -104,7 +117,7 @@ int	create_map(t_utils *utils, char *doc)
 	fd = open(doc, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putendl_fd("Open error", 2);
+		ft_putendl_fd(OPEN_ERR, STDERR_FILENO);
 		return (0);
 	}
 	while (i < utils->data->empty_lines)

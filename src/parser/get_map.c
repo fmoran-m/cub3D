@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 13:50:27 by fmoran-m          #+#    #+#             */
+/*   Updated: 2024/09/02 14:07:01 by fmoran-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3D.h"
 
 int	is_map_char(char c)
@@ -38,14 +50,6 @@ static int	get_to_map(char *line, int *status, t_data *data)
 	}
 	data->empty_lines++;
 	return (1);
-}
-
-static int	is_dir_char(char c)
-{
-	if (c == 'N' || c == 'E'
-	|| c == 'W' || c == 'S')
-		return (1);
-	return (0);
 }
 
 static int	check_map(char *line, t_map *map, t_data *data)

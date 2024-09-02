@@ -1,4 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/02 13:50:56 by fmoran-m          #+#    #+#             */
+/*   Updated: 2024/09/02 15:17:40 by fmoran-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub3D.h"
+
+int	xpm_checker(t_data *data)
+{
+	if (!file_checker(data->north, ".xpm42"))
+		return (0);
+	if (!file_checker(data->west, ".xpm42"))
+		return (0);
+	if (!file_checker(data->east, ".xpm42"))
+		return (0);
+	if (!file_checker(data->south, ".xpm42"))
+		return (0);
+	return (1);
+}
+
+int	is_dir_char(char c)
+{
+	if (c == 'N' || c == 'E'
+		|| c == 'W' || c == 'S')
+		return (1);
+	return (0);
+}
 
 int	is_map_dir(char c)
 {
