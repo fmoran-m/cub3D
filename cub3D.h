@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 15:16:52 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:23:40 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define INC_FORMAT_MAP "Error: Incorrect map format"
 # define INC_FORMAT_PLY "Error: Multiple player positions declarations"
 # define MLX_ERROR_MSG "Error: Incorrect mlx initialisation"
+# define MLX_DFL_MSG "Error: Incorrect mlx syscall"
 # define MEM_ERROR_MSG "Error: Incorrect memory allocation"
 # define MLX_IMG_ERROR "Error: Couldn't initialise image"
 # define XPM_ERR "Error: Incorrect image extension"
@@ -203,7 +204,7 @@ int			print_error(int type);
 
 // play_game.c
 void		raycasting(t_utils *utils);
-void		play_game(t_utils *utils);
+int			play_game(t_utils *utils);
 
 // line_and_wall.c
 void		draw_line(t_utils *utils, int x);

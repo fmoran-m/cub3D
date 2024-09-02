@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:50:32 by fmoran-m          #+#    #+#             */
-/*   Updated: 2024/09/02 13:59:33 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:39:12 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,24 @@ void	init_utils(t_utils *utils)
 {
 	utils->mlx = NULL;
 	utils->player = init_player();
-	utils->ray = init_ray();
-	utils->text = init_graphs();
-	init_data(utils->data);
-	init_map(utils->map);
-	if (!utils->player || !utils->ray)
+	if (!utils->player)
 	{
 		free_structs(utils);
 		exit(EXIT_FAILURE);
 	}
+	utils->ray = init_ray();
+	if (!utils->ray)
+	{
+		free_structs(utils);
+		exit(EXIT_FAILURE);
+	}
+	utils->text = init_graphs();
+	if (!utils->text)
+	{
+		free_structs(utils);
+		exit(EXIT_FAILURE);
+	}
+	init_data(utils->data);
+	init_map(utils->map);
+	return ;
 }

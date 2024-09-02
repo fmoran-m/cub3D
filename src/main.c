@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:07:29 by fmoran-m          #+#    #+#             */
-/*   Updated: 2024/09/02 15:18:08 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:16:50 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_utils	utils;
-	t_map	map;
-	t_data	data;
+	t_utils		utils;
+	t_map		map;
+	t_data		data;
 
 	if (argc != 2)
 		return (ft_putendl_fd(ARGC_ERR, STDERR_FILENO), EXIT_ERR);
@@ -35,7 +35,8 @@ int	main(int argc, char **argv)
 	}
 	if (!create_map(&utils, argv[1]))
 		return (free_structs(&utils), EXIT_ERR);
-	play_game(&utils);
+	if (!play_game(&utils))
+		return (free_structs(&utils), EXIT_ERR);
 	free_structs(&utils);
 	return (EXIT_SUCCESS);
 }
