@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:50:27 by fmoran-m          #+#    #+#             */
-/*   Updated: 2024/09/02 14:07:01 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:48:16 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	get_map(t_utils *utils, int fd)
 			return (free(line), 0);
 		free(line);
 	}
+	if (utils->data->dir_flag == 0)
+		return (ft_putendl_fd(DIR_ERR, STDERR_FILENO), 0);
 	utils->map->map_size = n;
 	return (1);
 }

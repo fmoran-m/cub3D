@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:50:44 by fmoran-m          #+#    #+#             */
-/*   Updated: 2024/09/02 13:51:25 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:28:03 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static int	control_num(t_data *data, char *line, int *status, int i)
 	start = i;
 	while (line[i] && ft_isnum(line[i]))
 		i++;
+	if (i == 0)
+		return (ft_putendl_fd(INC_FORMAT, STDERR_FILENO), 0);
 	if (!avoid_spaces(line[i]) && line[i] != ',')
 	{
 		ft_putendl_fd(INC_FORMAT, STDERR_FILENO);
@@ -111,7 +113,7 @@ int	save_color(t_data *data, char *line, int *status)
 	{
 		i = control_comma(line, status, i);
 		if (i == 0)
-			return (0);
+            return (0);
 	}
 	return (i);
 }

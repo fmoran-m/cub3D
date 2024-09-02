@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 16:23:40 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:45:19 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 # define FILE_NOT_FOUND "Error: File not found"
 # define INC_FORMAT "Error: Incorrect data format"
 # define INC_FORMAT_MAP "Error: Incorrect map format"
-# define INC_FORMAT_PLY "Error: Multiple player positions declarations"
+# define INC_FORMAT_PLY "Error: Multiple player position declarations"
 # define MLX_ERROR_MSG "Error: Incorrect mlx initialisation"
 # define MLX_DFL_MSG "Error: Incorrect mlx syscall"
 # define MEM_ERROR_MSG "Error: Incorrect memory allocation"
-# define MLX_IMG_ERROR "Error: Couldn't initialise image"
+# define MLX_IMG_ERROR "Error: Could not initialise image"
 # define XPM_ERR "Error: Incorrect image extension"
 # define PATH_ERR "Error: Texture path does not exist"
 # define OPEN_ERR "Error: Cannot open argument file"
+# define DIR_ERR "Error: No player"
 
 # define EXIT_ERR	1
 # define FUNC_FAIL	0
@@ -47,7 +48,7 @@
 # define C_COMMA_1	13
 # define C_COMMA_2	14
 
-# define IMG_WIDTH  720
+# define IMG_WIDTH  854
 # define IMG_HEIGHT	480
 
 # define TRUE 1
