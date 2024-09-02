@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 18:38:59 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:10:31 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int	start_maze(t_utils *utils)
 	start_player(utils);
 	utils->text->text[0].text = mlx_load_xpm42(utils->data->north);
 	utils->text->text[1].text = mlx_load_xpm42(utils->data->east);
-	utils->text->text[2].text = mlx_load_xpm42(utils->data->south);
-	utils->text->text[3].text = mlx_load_xpm42(utils->data->west);
+    utils->text->text[2].text = mlx_load_xpm42(utils->data->south);
+    utils->text->text[3].text = mlx_load_xpm42(utils->data->west);
 	while (++i < 4)
 	{
 		if (!utils->text->text[i].text)
@@ -71,12 +71,13 @@ static void	render_image(void *param)
 
 int	play_game(t_utils *utils)
 {
-	utils->mlx = mlx_init(IMG_WIDTH, IMG_HEIGHT, "Cub3D", TRUE);
+	utils->mlx = mlx_init(IMG_WIDTH, IMG_HEIGHT, "Cub3D", FALSE);
 	if (!utils->mlx)
 		return (ft_putendl_fd(MLX_ERROR_MSG, STDERR_FILENO), 0);
 	start_maze(utils);
 	if (!mlx_loop_hook(utils->mlx, render_image, utils))
 		return (ft_putendl_fd(MLX_DFL_MSG, STDERR_FILENO), 0);
 	mlx_loop(utils->mlx);
+	mlx_terminate(utils->mlx);
 	return (1);
 }

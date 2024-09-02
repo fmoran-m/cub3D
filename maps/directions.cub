@@ -1,17 +1,17 @@
 F 139,99,58
 C 171,154,137
 
-NO ./textures/wolfenstein/grey_stone.xpm42
-EA ./textures/wolfenstein/purple_stone.xpm42
-WE ./textures/wolfenstein/red_brick.xpm42
-SO ./textures/wolfenstein/wood.xpm42
+EA ./textures/directions/east.xpm42
+SO ./textures/directions/south.xpm42
+WE ./textures/directions/west.xpm42
+NO ./textures/directions/north.xpm42
 
 1111111111111111111
 1001001001001001001
 1001001001001001001
 1001001001001001001
 1001001000001001001
-100000000S000000001
+100000000E000000001
 1000011111111000001
 1111000000000001111
 1000000101010000001

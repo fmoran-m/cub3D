@@ -21,7 +21,7 @@ bonus: $(O.BONUS) $(OBJS)
 	ar rcs $(NAME) $(O.BONUS) $(OBJS)
 
 %.o:%.c
-		gcc $(FLAGS) -c $< -o $@
+		cc $(FLAGS) -c $< -o $@
 
 clean:
 		rm -f $(OBJS) $(O.BONUS)
