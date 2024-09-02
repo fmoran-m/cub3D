@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 20:10:31 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/02 21:30:00 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	start_maze(t_utils *utils)
 	i = -1;
 	start_player(utils);
 	utils->text->text[0].text = mlx_load_xpm42(utils->data->north);
-	utils->text->text[1].text = mlx_load_xpm42(utils->data->east);
-    utils->text->text[2].text = mlx_load_xpm42(utils->data->south);
-    utils->text->text[3].text = mlx_load_xpm42(utils->data->west);
+	utils->text->text[1].text = mlx_load_xpm42(utils->data->west);
+    utils->text->text[2].text = mlx_load_xpm42(utils->data->east);
+    utils->text->text[3].text = mlx_load_xpm42(utils->data->south);
 	while (++i < 4)
 	{
 		if (!utils->text->text[i].text)

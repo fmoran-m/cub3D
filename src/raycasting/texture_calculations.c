@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_calculations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:28:40 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 20:30:52 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/02 21:25:56 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	get_text_x(t_ray *ray, t_img text, double square_impact)
 	text_x = (int)(square_impact * text.display->width);
 	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x > 0)
 		text_x = text.display->width - text_x - 1;
-	else if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0)
+	if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y < 0)
 		text_x = text.display->width - text_x - 1;
 	return (text_x);
 }

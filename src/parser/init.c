@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:50:32 by fmoran-m          #+#    #+#             */
-/*   Updated: 2024/09/02 15:39:12 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/02 21:09:01 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_ray	*init_ray(void)
 	ray->line = 0;
 	ray->draw_start = 0;
 	ray->draw_end = 0;
-	ray->wall_x = 0;
 	return (ray);
 }
 
