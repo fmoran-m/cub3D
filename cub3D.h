@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 15:54:07 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 20:45:24 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define PATH_ERR "Error: Texture path does not exist"
 # define OPEN_ERR "Error: Cannot open argument file"
 # define DIR_ERR "Error: No player"
+# define TEXT_ERR "Error: Unable to load textures"
 
 # define EXIT_ERR	1
 # define FUNC_FAIL	0

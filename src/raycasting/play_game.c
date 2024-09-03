@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 15:27:37 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 21:29:09 by nvillalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3D.h"
 
-static int	load_textures(t_graphs *text, t_utils *utils)
+static void	load_textures(t_graphs *text, t_utils *utils)
 {
 	int	i;
 
@@ -28,12 +28,15 @@ static int	load_textures(t_graphs *text, t_utils *utils)
 	while (++i < 4)
 	{
 		if (!text->text[i].display)
-			return (free_structs(utils), EXIT_FAILURE);
+		{
+			ft_putendl_fd(TEXT_ERR, STDERR_FILENO);
+			return (free_structs(utils), exit(EXIT_FAILURE));
+		}
 	}
-	return (FUNC_SUCC);
+	return ;
 }
 
-static int	start_maze(t_utils *utils)
+static void	start_maze(t_utils *utils)
 {
 	int	i;
 
@@ -46,10 +49,13 @@ static int	start_maze(t_utils *utils)
 	while (++i < 4)
 	{
 		if (!utils->text->text[i].text)
-			return (free_structs(utils), EXIT_FAILURE);
+		{
+			ft_putendl_fd(TEXT_ERR, STDERR_FILENO);
+			return (free_structs(utils), exit(EXIT_FAILURE));
+		}
 	}
 	load_textures(utils->text, utils);
-	return (FUNC_SUCC);
+	return ;
 }
 
 static void	render_image(void *param)

@@ -9,3 +9,4 @@ MLX42/
 libft/libft.a
 mlx/build
 .vscode
+build/
