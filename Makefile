@@ -6,7 +6,7 @@
 #    By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 20:53:26 by nvillalt          #+#    #+#              #
-#    Updated: 2024/09/03 14:08:44 by fmoran-m         ###   ########.fr        #
+#    Updated: 2024/09/03 15:52:00 by fmoran-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ CC = cc
 LM = make -C
 CFLAGS = -O1 #-Wall -Wextra -Werror
 
-INCLUDES = cub3D.h mlx/include/MLX42/MLX42.h
+INCLUDES = cub3D.h \
+		   mlx/include/MLX42/MLX42.h
 
 SRC = src/main.c \
 	src/free.c \

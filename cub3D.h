@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 15:29:50 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:54:07 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@
 # define MLX_ERROR 1
 # define MEM_ERROR 2
 # define IMG_ERROR 3
+
+# define OFFSET 0.01
+# define SPEED	0.05
+# define THETA	0.05
 
 # define FOV 0.66
 
@@ -157,8 +161,6 @@ typedef struct s_texture
 
 typedef struct s_move
 {
-	double		speed;
-	double		theta;
 	double		old_dir_x;
 	double		old_dir_y;
 	double		old_plane_x;
