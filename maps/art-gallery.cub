@@ -1,0 +1,16 @@
+NO ./textures/art/vermeer.xpm42
+SO ./textures/art/davinci.xpm42
+WE ./textures/art/sorolla.xpm42
+EA ./textures/art/monet.xpm42
+
+F 100,42,145
+C 153,150,255
+
+111111111111
+100111000111
+100000000001
+100000000011
+10S000000001
+111101111111
+110000000001
+111111111111
