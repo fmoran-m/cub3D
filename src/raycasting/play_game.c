@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 12:59:17 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:27:37 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int	start_maze(t_utils *utils)
 	start_player(utils);
 	utils->text->text[0].text = mlx_load_xpm42(utils->data->north);
 	utils->text->text[1].text = mlx_load_xpm42(utils->data->west);
-    utils->text->text[2].text = mlx_load_xpm42(utils->data->east);
-    utils->text->text[3].text = mlx_load_xpm42(utils->data->south);
+	utils->text->text[2].text = mlx_load_xpm42(utils->data->east);
+	utils->text->text[3].text = mlx_load_xpm42(utils->data->south);
 	while (++i < 4)
 	{
 		if (!utils->text->text[i].text)
@@ -65,7 +65,6 @@ static void	render_image(void *param)
 		free_structs(utils);
 		exit(1);
 	}
-    printf("X: %f, Y: %f\n", utils->player->dir_x, utils->player->dir_y);
 	inputs(utils);
 	return ;
 }

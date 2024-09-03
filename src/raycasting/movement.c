@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:22:41 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 14:54:26 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:28:51 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ static void	move_up_down(t_move *move, t_utils *utils, int type)
 
 static void	spin(t_move *move, t_utils *utils)
 {
-		if (mlx_is_key_down(utils->mlx, MLX_KEY_RIGHT))
-			spin_move(move, utils, 0);
-		else if (mlx_is_key_down(utils->mlx, MLX_KEY_LEFT))
-			spin_move(move, utils, 1);
+	if (mlx_is_key_down(utils->mlx, MLX_KEY_RIGHT))
+		spin_move(move, utils, 0);
+	else if (mlx_is_key_down(utils->mlx, MLX_KEY_LEFT))
+		spin_move(move, utils, 1);
 	return ;
 }
 

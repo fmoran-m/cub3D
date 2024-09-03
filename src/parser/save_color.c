@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:50:44 by fmoran-m          #+#    #+#             */
-/*   Updated: 2024/09/02 20:28:03 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:26:23 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	save_color(t_data *data, char *line, int *status)
 	{
 		i = control_comma(line, status, i);
 		if (i == 0)
-            return (0);
+			return (0);
 	}
 	return (i);
 }

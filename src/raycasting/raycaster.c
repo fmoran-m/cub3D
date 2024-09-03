@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:52:22 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 14:49:15 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:26:46 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	raycasting(t_utils *utils)
 		dda_algorithm(utils->ray, utils->map);
 		get_line_height(utils->ray, utils->player);
 		draw_line(utils, x);
-        printf("X: %f, Y: %f\n", utils->ray->ray_dir_x, utils->ray->ray_dir_y); //!!!!!
 		x++;
 	}
 }
