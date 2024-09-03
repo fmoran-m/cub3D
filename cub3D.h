@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 21:13:20 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:04:11 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define C_COMMA_1	13
 # define C_COMMA_2	14
 
-# define IMG_WIDTH  854
-# define IMG_HEIGHT	480
+# define IMG_WIDTH  1920
+# define IMG_HEIGHT	1080
 
 # define TRUE 1
 # define FALSE 0

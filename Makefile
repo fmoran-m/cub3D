@@ -6,7 +6,7 @@
 #    By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/29 20:53:26 by nvillalt          #+#    #+#              #
-#    Updated: 2024/09/02 20:51:13 by fmoran-m         ###   ########.fr        #
+#    Updated: 2024/09/03 14:08:44 by fmoran-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,7 @@ MLX = $(MLX_LIB) -ldl -lglfw -pthread -lm
 
 CC = cc
 LM = make -C
-CFLAGS = -g3 -fsanitize=address #-Wall -Wextra -Werror
-
+CFLAGS = -O1 #-Wall -Wextra -Werror
 
 INCLUDES = cub3D.h mlx/include/MLX42/MLX42.h
 

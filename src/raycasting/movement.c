@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:22:41 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 20:39:19 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:54:26 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@ static void	spin_move(t_move *move, t_utils *utils, int type)
 {
 	if (type == 0)
 	{
-		utils->player->dir_x = move->old_dir_x * cos(-move->theta)
-			- move->old_dir_y * sin(-move->theta);
-		utils->player->dir_y = move->old_dir_x * sin(-move->theta)
-			+ move->old_dir_y * cos(-move->theta);
-		utils->player->plane_x = move->old_plane_x * cos(-move->theta)
-			- move->old_plane_y * sin(-move->theta);
-		utils->player->plane_y = move->old_plane_x * sin(-move->theta)
-			+ move->old_plane_y * cos(-move->theta);
-	}
-	else if (type == 1)
-	{
 		utils->player->dir_x = move->old_dir_x * cos(move->theta)
 			- move->old_dir_y * sin(move->theta);
 		utils->player->dir_y = move->old_dir_x * sin(move->theta)
@@ -35,6 +24,17 @@ static void	spin_move(t_move *move, t_utils *utils, int type)
 			- move->old_plane_y * sin(move->theta);
 		utils->player->plane_y = move->old_plane_x * sin(move->theta)
 			+ move->old_plane_y * cos(move->theta);
+	}
+	else if (type == 1)
+	{
+		utils->player->dir_x = move->old_dir_x * cos(-move->theta)
+			- move->old_dir_y * sin(-move->theta);
+		utils->player->dir_y = move->old_dir_x * sin(-move->theta)
+			+ move->old_dir_y * cos(-move->theta);
+		utils->player->plane_x = move->old_plane_x * cos(-move->theta)
+			- move->old_plane_y * sin(-move->theta);
+		utils->player->plane_y = move->old_plane_x * sin(-move->theta)
+			+ move->old_plane_y * cos(-move->theta);
 	}
 	return ;
 }
@@ -96,22 +96,10 @@ static void	move_up_down(t_move *move, t_utils *utils, int type)
 
 static void	spin(t_move *move, t_utils *utils)
 {
-	if (utils->player->direction == 'N'
-		|| utils->player->direction == 'S')
-	{
 		if (mlx_is_key_down(utils->mlx, MLX_KEY_RIGHT))
 			spin_move(move, utils, 0);
 		else if (mlx_is_key_down(utils->mlx, MLX_KEY_LEFT))
 			spin_move(move, utils, 1);
-	}
-	else if (utils->player->direction == 'W'
-		|| utils->player->direction == 'E')
-	{
-			if (mlx_is_key_down(utils->mlx, MLX_KEY_RIGHT))
-			spin_move(move, utils, 1);
-		else if (mlx_is_key_down(utils->mlx, MLX_KEY_LEFT))
-			spin_move(move, utils, 0);
-	}
 	return ;
 }
 

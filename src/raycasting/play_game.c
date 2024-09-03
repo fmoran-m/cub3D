@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 21:30:00 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:59:17 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	render_image(void *param)
 		free_structs(utils);
 		exit(1);
 	}
+    printf("X: %f, Y: %f\n", utils->player->dir_x, utils->player->dir_y);
 	inputs(utils);
 	return ;
 }

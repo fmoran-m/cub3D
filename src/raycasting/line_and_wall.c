@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:30:36 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 21:10:06 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:02:46 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static t_img	select_texture(t_ray *ray, t_img *text)
 	if (ray->side == HORIZONAL_AXIS && ray->ray_dir_y <= 0)
 		return (text[0]);
 	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x >= 0)
-		return (text[1]);
-	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x < 0)
 		return (text[2]);
+	if (ray->side == VERTICAL_AXIS && ray->ray_dir_x < 0)
+		return (text[1]);
 	return (text[3]);
 }
 

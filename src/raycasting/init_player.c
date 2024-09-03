@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:35:46 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/02 20:35:48 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:51:01 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	get_player_direction(t_player *player, char dir)
 		player->dir_y = 1;
 	}
 	player->plane_x = player->dir_y * FOV;
+    if (dir == 'N' || dir == 'S')
+        player->plane_x *= -1;
 	player->plane_y = player->dir_x * FOV;
 	return ;
 }
