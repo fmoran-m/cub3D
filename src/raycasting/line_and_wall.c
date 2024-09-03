@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:30:36 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 13:02:46 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:43:45 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static void	draw_wall(t_utils *utils, int *y, int x)
 	info.text_pos = get_text_pos(utils->ray, info.step);
 	while (*y < utils->ray->draw_end)
 	{
-		info.text_y = (int)info.text_pos
-			& (texture.display->height - 1);
+		info.text_y = (int)info.text_pos;
 		info.text_pos += info.step;
 		color = get_text_color(info.text_x, info.text_y, texture);
 		mlx_put_pixel(utils->img, x, *y, color);
