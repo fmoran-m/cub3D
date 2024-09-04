@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:52:22 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/04 16:12:16 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:51:03 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	raycasting(t_utils *utils)
 	{
 		ft_putendl_fd(MLX_DFL_MSG, STDERR_FILENO);
 		free_structs(utils);
+        mlx_terminate(utils->mlx);
 		exit(1);
 	}
 	while (x < IMG_WIDTH)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:45:48 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 21:29:09 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:49:54 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	load_textures(t_graphs *text, t_utils *utils)
 		if (!text->text[i].display)
 		{
 			ft_putendl_fd(TEXT_ERR, STDERR_FILENO);
-			return (free_structs(utils), exit(EXIT_FAILURE));
+			return (mlx_terminate(utils->mlx) ,free_structs(utils), exit(EXIT_FAILURE));
 		}
 	}
 	return ;
@@ -51,7 +51,8 @@ static void	start_maze(t_utils *utils)
 		if (!utils->text->text[i].text)
 		{
 			ft_putendl_fd(TEXT_ERR, STDERR_FILENO);
-			return (free_structs(utils), exit(EXIT_FAILURE));
+			return (mlx_terminate(utils->mlx),
+                free_structs(utils), exit(EXIT_FAILURE));
 		}
 	}
 	load_textures(utils->text, utils);
@@ -69,6 +70,7 @@ static void	render_image(void *param)
 	{
 		ft_putendl_fd(MLX_DFL_MSG, STDERR_FILENO);
 		free_structs(utils);
+        mlx_terminate(utils->mlx);
 		exit(1);
 	}
 	inputs(utils);
