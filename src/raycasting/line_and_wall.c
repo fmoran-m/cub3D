@@ -6,7 +6,7 @@
 /*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:30:36 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 19:43:45 by fmoran-m         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:17:10 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,12 @@ void	draw_line(t_utils *utils, int x)
 	return ;
 }
 
-void	get_line_height(t_ray *ray, t_player *player)
+void	get_line_height(t_ray *ray)
 {
 	if (ray->side == VERTICAL_AXIS)
-	{
 		ray->wall_dist = ray->side_dist_x - ray->delta_dist_x;
-		ray->wall_x = player->pos_y + ray->wall_dist * ray->ray_dir_y;
-	}
 	else if (ray->side == HORIZONAL_AXIS)
-	{
 		ray->wall_dist = ray->side_dist_y - ray->delta_dist_y;
-		ray->wall_x = player->pos_x + ray->wall_dist * ray->ray_dir_x;
-	}
 	ray->line = (int)(IMG_HEIGHT / ray->wall_dist);
 	ray->draw_start = -ray->line / 2 + IMG_HEIGHT / 2;
 	if (ray->draw_start < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvillalt <nvillalt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fmoran-m <fmoran-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:45:11 by nvillalt          #+#    #+#             */
-/*   Updated: 2024/09/03 20:45:24 by nvillalt         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:13:19 by fmoran-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ typedef struct s_ray
 	double				delta_dist_x;
 	double				delta_dist_y;
 	double				wall_dist;
-	double				wall_x;
 	int					map_x;
 	int					map_y;
 	int					hit;
@@ -213,7 +212,7 @@ int			play_game(t_utils *utils);
 
 // line_and_wall.c
 void		draw_line(t_utils *utils, int x);
-void		get_line_height(t_ray *ray, t_player *player);
+void		get_line_height(t_ray *ray);
 
 // movements.c
 void		inputs(t_utils *utils);
