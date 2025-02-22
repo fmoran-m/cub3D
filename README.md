@@ -4,6 +4,15 @@ The **Cub3d** project involves creating a 3D environment from a 2D map composed 
 
 To ensure the 3D space is represented correctly, a window of a defined size is set, with a ray assigned to generate an image for each pixel in the horizontal resolution. This way, the screen will show three sections: sky, floor, and wall. The length of each line depends on the distance from the player to the wall.
 
+This project uses the MLX, a graphical library created by students and staff of the 42 school.
+
+## Images
+
+![Image 1](images/image1.jpg)
+![Image 4](images/image4.jpg)
+![Image 2](images/image2.jpg)
+![Image 3](images/image3.jpg)
+
 ## Usage
 
 The program can be executed with the following syntax:
